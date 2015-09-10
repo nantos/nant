@@ -8,7 +8,7 @@
     <RootNamespace>NAnt.DotNet</RootNamespace>
     <AssemblyName>NAnt.DotNetTasks</AssemblyName>
     <OutputType>Library</OutputType>
-    <RunPostBuildEvent>OnSuccessfulBuild</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <PreBuildEvent />
     <PostBuildEvent />
     <NoConfig>false</NoConfig>

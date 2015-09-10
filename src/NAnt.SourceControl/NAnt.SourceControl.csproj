@@ -8,7 +8,7 @@
     <RootNamespace>NAnt.SourceControl</RootNamespace>
     <AssemblyName>NAnt.SourceControlTasks</AssemblyName>
     <OutputType>Library</OutputType>
-    <RunPostBuildEvent>OnSuccessfulBuild</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <PreBuildEvent />
     <PostBuildEvent />
     <NoConfig>false</NoConfig>

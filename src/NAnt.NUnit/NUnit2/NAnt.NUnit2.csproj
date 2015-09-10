@@ -8,7 +8,7 @@
     <RootNamespace>NAnt.NUnit2</RootNamespace>
     <AssemblyName>NAnt.NUnit2Tasks</AssemblyName>
     <OutputType>Library</OutputType>
-    <RunPostBuildEvent>OnSuccessfulBuild</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <PreBuildEvent />
     <PostBuildEvent />
     <NoConfig>false</NoConfig>

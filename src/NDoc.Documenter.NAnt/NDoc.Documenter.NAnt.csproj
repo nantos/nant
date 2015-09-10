@@ -8,7 +8,7 @@
     <RootNamespace>NDoc.Documenter.NAnt</RootNamespace>
     <AssemblyName>NDoc.Documenter.NAnt</AssemblyName>
     <OutputType>Library</OutputType>
-    <RunPostBuildEvent>OnSuccessfulBuild</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <PreBuildEvent />
     <PostBuildEvent />
     <NoConfig>false</NoConfig>

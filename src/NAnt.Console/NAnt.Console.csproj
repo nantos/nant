@@ -8,7 +8,7 @@
     <RootNamespace>NAnt.Console</RootNamespace>
     <AssemblyName>NAnt</AssemblyName>
     <OutputType>Exe</OutputType>
-    <RunPostBuildEvent>OnSuccessfulBuild</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <PreBuildEvent />
     <PostBuildEvent />
     <NoConfig>false</NoConfig>
