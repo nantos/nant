@@ -214,7 +214,7 @@ namespace NAnt.Core {
             string xpath = "";
             int index = 0;
 
-            while (nav.NodeType.ToString(CultureInfo.InvariantCulture) != "Root") {
+            while (nav.NodeType.ToString() != "Root") {
                 // loop thru children until we find ourselves
                 XPathNavigator navParent = nav.Clone();
                 navParent.MoveToParent();

@@ -425,7 +425,9 @@ namespace NAnt.Core {
         /// <summary>Initializes the task.</summary>
         protected override void Initialize() {
             // Just defer for now so that everything just works
+#pragma warning disable 618
             InitializeTask(XmlNode);
+#pragma warning restore 618
         }
 
         /// <summary>Initializes the task.</summary>

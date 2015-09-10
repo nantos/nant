@@ -67,7 +67,7 @@ namespace Tests.NAnt.Core.Tasks {
                 </project>";
             
             string result = RunBuild(string.Format(CultureInfo.InvariantCulture, 
-                xml, AvailableTask.ResourceType.File.ToString(CultureInfo.InvariantCulture), 
+                xml, AvailableTask.ResourceType.File.ToString(), 
                 _tempFile, "${file.exists}"));
             
             Assert.IsTrue(result.ToLower().IndexOf("file.exists=true") != -1,
@@ -83,7 +83,7 @@ namespace Tests.NAnt.Core.Tasks {
                 </project>";
             
             string result = RunBuild(string.Format(CultureInfo.InvariantCulture, 
-                xml, AvailableTask.ResourceType.File.ToString(CultureInfo.InvariantCulture), 
+                xml, AvailableTask.ResourceType.File.ToString(), 
                 _notExistingTempFile, "${file.exists}"));
             
             Assert.IsTrue(result.ToLower().IndexOf("file.exists=false") != -1,
@@ -102,7 +102,7 @@ namespace Tests.NAnt.Core.Tasks {
             // mono even on windows acts like unix here.
             if (!(PlatformHelper.IsMono)) {
                 RunBuild(string.Format(CultureInfo.InvariantCulture, 
-                    xml, AvailableTask.ResourceType.File.ToString(CultureInfo.InvariantCulture), 
+                    xml, AvailableTask.ResourceType.File.ToString(), 
                     "###-?", "${file.exists}"));
             } else {
                 // throw the exception to keep the test happy
@@ -119,7 +119,7 @@ namespace Tests.NAnt.Core.Tasks {
                 </project>";
             
             string result = RunBuild(string.Format(CultureInfo.InvariantCulture, 
-                xml, AvailableTask.ResourceType.Directory.ToString(CultureInfo.InvariantCulture), 
+                xml, AvailableTask.ResourceType.Directory.ToString(), 
                 _tempDir, "${dir.exists}"));
             
             Assert.IsTrue(result.ToLower().IndexOf("dir.exists=true") != -1,
@@ -135,7 +135,7 @@ namespace Tests.NAnt.Core.Tasks {
                 </project>";
             
             string result = RunBuild(string.Format(CultureInfo.InvariantCulture, 
-                xml, AvailableTask.ResourceType.Directory.ToString(CultureInfo.InvariantCulture), 
+                xml, AvailableTask.ResourceType.Directory.ToString(), 
                 _notExistingTempDir, "${dir.exists}"));
             
             Assert.IsTrue(result.ToLower().IndexOf("dir.exists=false") != -1,
@@ -153,7 +153,7 @@ namespace Tests.NAnt.Core.Tasks {
             // unix accepts most characters ( except / ) so this test won't fail there.
             if (! PlatformHelper.IsUnix ) {
                 RunBuild(string.Format(CultureInfo.InvariantCulture, 
-                    xml, AvailableTask.ResourceType.Directory.ToString(CultureInfo.InvariantCulture), 
+                    xml, AvailableTask.ResourceType.Directory.ToString(), 
                     "|", "${dir.exists}"));
             }   else {
                 throw new TestBuildException();    

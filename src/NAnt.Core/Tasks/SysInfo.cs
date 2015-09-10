@@ -184,7 +184,7 @@ namespace NAnt.Core.Tasks {
 
             // set properties
             Properties[Prefix + "clr.version"] = Environment.Version.ToString();
-            Properties[Prefix + "os.platform"] = Environment.OSVersion.Platform.ToString(CultureInfo.InvariantCulture);
+            Properties[Prefix + "os.platform"] = Environment.OSVersion.Platform.ToString();
             Properties[Prefix + "os.version"]  = Environment.OSVersion.Version.ToString();
             Properties[Prefix + "os.folder.applicationdata"] = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);  
             Properties[Prefix + "os.folder.commonapplicationData"] = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);  

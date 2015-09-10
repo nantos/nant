@@ -282,7 +282,7 @@ namespace NAnt.Core {
                     _xmlWriter.WriteStartElement(Elements.Message);
 
                     // write message level as attribute
-                    _xmlWriter.WriteAttributeString(Attributes.MessageLevel, e.MessageLevel.ToString(CultureInfo.InvariantCulture));
+                    _xmlWriter.WriteAttributeString(Attributes.MessageLevel, e.MessageLevel.ToString());
 
                     if (IsValidXml(rawMessage)) {
                         rawMessage = Regex.Replace(rawMessage, @"<\?.*\?>", string.Empty);

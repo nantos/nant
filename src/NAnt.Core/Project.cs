@@ -597,7 +597,7 @@ namespace NAnt.Core {
                 } else {
                     throw new BuildException(string.Format(CultureInfo.InvariantCulture, 
                         ResourceUtils.GetString("NA1060"), 
-                        Environment.OSVersion.Platform.ToString(CultureInfo.InvariantCulture),
+                        Environment.OSVersion.Platform.ToString(),
                         (int) Environment.OSVersion.Platform));
                 }
             }
@@ -1638,7 +1638,7 @@ namespace NAnt.Core {
                 default:
                     throw new BuildException(string.Format(CultureInfo.InvariantCulture, 
                         ResourceUtils.GetString("NA1060"), 
-                        Environment.OSVersion.Platform.ToString(CultureInfo.InvariantCulture),
+                        Environment.OSVersion.Platform.ToString(),
                         (int) Environment.OSVersion.Platform));
             }
         }

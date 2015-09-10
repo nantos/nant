@@ -453,7 +453,7 @@ namespace NAnt.NUnit2.Tasks {
             XPathDocument originalXPathDocument = new XPathDocument(resultFile);
             // Using XslTransform instead of XslCompiledTransform because the latter
             // does not display nunit output for unknown reasons.
-            XslTransform summaryXslTransform = new XslTransform();
+            XslCompiledTransform summaryXslTransform = new XslCompiledTransform();
             XmlTextReader transformReader = GetTransformReader(test);
             summaryXslTransform.Load(transformReader);
             summaryXslTransform.Transform(originalXPathDocument, null, writer);

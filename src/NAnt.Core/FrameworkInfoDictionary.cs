@@ -77,10 +77,9 @@ namespace NAnt.Core {
         /// <summary>
         /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
         /// </summary>
-        /// <param name="codeProvider">The code provider.</param>
         /// <param name="comparer">The comparer.</param>
-        public FrameworkInfoDictionary(IHashCodeProvider codeProvider, IComparer comparer) {
-            _innerHash = new Hashtable(codeProvider, comparer);
+        public FrameworkInfoDictionary(IEqualityComparer comparer) {
+            _innerHash = new Hashtable(comparer);
         }
 
         /// <summary>
@@ -96,20 +95,18 @@ namespace NAnt.Core {
         /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
         /// </summary>
         /// <param name="dictionary">The dictionary.</param>
-        /// <param name="codeProvider">The code provider.</param>
         /// <param name="comparer">The comparer.</param>
-        public FrameworkInfoDictionary(IDictionary dictionary, IHashCodeProvider codeProvider, IComparer comparer) {
-            _innerHash = new Hashtable (dictionary, codeProvider, comparer);
+        public FrameworkInfoDictionary(IDictionary dictionary, IEqualityComparer comparer) {
+            _innerHash = new Hashtable (dictionary, comparer);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
         /// </summary>
         /// <param name="capacity">The capacity.</param>
-        /// <param name="codeProvider">The code provider.</param>
         /// <param name="comparer">The comparer.</param>
-        public FrameworkInfoDictionary(int capacity, IHashCodeProvider codeProvider, IComparer comparer) {
-            _innerHash = new Hashtable (capacity, codeProvider, comparer);
+        public FrameworkInfoDictionary(int capacity, IEqualityComparer comparer) {
+            _innerHash = new Hashtable (capacity, comparer);
         }
 
         /// <summary>
@@ -117,10 +114,9 @@ namespace NAnt.Core {
         /// </summary>
         /// <param name="dictionary">The dictionary.</param>
         /// <param name="loadFactor">The load factor.</param>
-        /// <param name="codeProvider">The code provider.</param>
         /// <param name="comparer">The comparer.</param>
-        public FrameworkInfoDictionary(IDictionary dictionary, float loadFactor, IHashCodeProvider codeProvider, IComparer comparer) {
-            _innerHash = new Hashtable (dictionary, loadFactor, codeProvider, comparer);
+        public FrameworkInfoDictionary(IDictionary dictionary, float loadFactor, IEqualityComparer comparer) {
+            _innerHash = new Hashtable (dictionary, loadFactor, comparer);
         }
 
         /// <summary>
@@ -128,10 +124,9 @@ namespace NAnt.Core {
         /// </summary>
         /// <param name="capacity">The capacity.</param>
         /// <param name="loadFactor">The load factor.</param>
-        /// <param name="codeProvider">The code provider.</param>
         /// <param name="comparer">The comparer.</param>
-        public FrameworkInfoDictionary(int capacity, float loadFactor, IHashCodeProvider codeProvider, IComparer comparer) {
-            _innerHash = new Hashtable (capacity, loadFactor, codeProvider, comparer);
+        public FrameworkInfoDictionary(int capacity, float loadFactor, IEqualityComparer comparer) {
+            _innerHash = new Hashtable (capacity, loadFactor, comparer);
         }
 
         #endregion Public Instance Constructors

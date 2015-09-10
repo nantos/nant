@@ -190,7 +190,7 @@ namespace NAnt.Core.Tasks {
 
                 // display build log message
                 Log(Level.Info, "Setting file attributes for {0} files to {1}.", 
-                    AttribFileSet.FileNames.Count, fileAttributes.ToString(CultureInfo.InvariantCulture));
+                    AttribFileSet.FileNames.Count, fileAttributes.ToString());
 
                 // perform operation on files
                 foreach (string path in AttribFileSet.FileNames) {
@@ -204,7 +204,7 @@ namespace NAnt.Core.Tasks {
 
                 // display build log message
                 Log(Level.Info, "Setting attributes for {0} directories to {1}.", 
-                    AttribFileSet.DirectoryNames.Count, directoryAttributes.ToString(CultureInfo.InvariantCulture));
+                    AttribFileSet.DirectoryNames.Count, directoryAttributes.ToString());
 
                 // perform operation on directories
                 foreach (string path in AttribFileSet.DirectoryNames) {
