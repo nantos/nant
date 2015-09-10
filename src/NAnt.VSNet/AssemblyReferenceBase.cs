@@ -29,9 +29,19 @@ using NAnt.Core;
 using NAnt.Core.Util;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class AssemblyReferenceBase : FileReferenceBase {
         #region Protected Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssemblyReferenceBase"/> class.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="referencesResolver">The references resolver.</param>
+        /// <param name="parent">The parent.</param>
+        /// <param name="gacCache">The gac cache.</param>
         protected AssemblyReferenceBase(XmlElement xmlDefinition, ReferencesResolver referencesResolver, ProjectBase parent, GacCache gacCache) : base(xmlDefinition, referencesResolver, parent, gacCache) {
         }
 
@@ -39,10 +49,22 @@ namespace NAnt.VSNet {
 
         #region Protected Instance Properties
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is private.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is private; otherwise, <c>false</c>.
+        /// </value>
         protected abstract bool IsPrivate {
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is private specified.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is private specified; otherwise, <c>false</c>.
+        /// </value>
         protected abstract bool IsPrivateSpecified {
             get;
         }
@@ -184,6 +206,11 @@ namespace NAnt.VSNet {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Creates the project reference.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <returns></returns>
         public ProjectReferenceBase CreateProjectReference(ProjectBase project) {
             return project.CreateProjectReference(project, IsPrivateSpecified, 
                 IsPrivate);
@@ -287,6 +314,12 @@ namespace NAnt.VSNet {
             return null;
         }
 
+        /// <summary>
+        /// Resolves from assembly folders.
+        /// </summary>
+        /// <param name="referenceElement">The reference element.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns></returns>
         protected virtual string ResolveFromAssemblyFolders(XmlElement referenceElement, string fileName) {
             return ResolveFromFolderList(SolutionTask.AssemblyFolderList, 
                 fileName);

@@ -192,14 +192,32 @@ namespace NAnt.VSNet {
             get { return _buildConfigurations; }
         }
 
+        /// <summary>
+        /// Gets the references.
+        /// </summary>
+        /// <value>
+        /// The references.
+        /// </value>
         public abstract ArrayList References {
             get;
         }
 
+        /// <summary>
+        /// Gets the solution task.
+        /// </summary>
+        /// <value>
+        /// The solution task.
+        /// </value>
         public SolutionTask SolutionTask {
             get { return _solutionTask; }
         }
 
+        /// <summary>
+        /// Gets the temporary files.
+        /// </summary>
+        /// <value>
+        /// The temporary files.
+        /// </value>
         public TempFileCollection TemporaryFiles {
             get { return _temporaryFiles; }
         }
@@ -223,14 +241,32 @@ namespace NAnt.VSNet {
 
         #region Protected Instance Properties
 
+        /// <summary>
+        /// Gets the output dir.
+        /// </summary>
+        /// <value>
+        /// The output dir.
+        /// </value>
         protected DirectoryInfo OutputDir {
             get { return _outputDir; }
         }
 
+        /// <summary>
+        /// Gets the gac cache.
+        /// </summary>
+        /// <value>
+        /// The gac cache.
+        /// </value>
         protected GacCache GacCache {
             get { return _gacCache; }
         }
-        
+
+        /// <summary>
+        /// Gets the references resolver.
+        /// </summary>
+        /// <value>
+        /// The references resolver.
+        /// </value>
         public ReferencesResolver ReferencesResolver {
             get { return _refResolver; }
         }
@@ -245,6 +281,14 @@ namespace NAnt.VSNet {
             get { return _projectDependencies; }
         }
 
+        /// <summary>
+        /// Gets the dev env dir.
+        /// </summary>
+        /// <value>
+        /// The dev env dir.
+        /// </value>
+        /// <exception cref="BuildException">
+        /// </exception>
         protected virtual string DevEnvDir {
             get {
                 string vs7CommonDirKeyName = @"SOFTWARE\Microsoft\VisualStudio\" 
@@ -292,9 +336,21 @@ namespace NAnt.VSNet {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Creates the project reference.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <param name="isPrivateSpecified">if set to <c>true</c> [is private specified].</param>
+        /// <param name="isPrivate">if set to <c>true</c> [is private].</param>
+        /// <returns></returns>
         public abstract ProjectReferenceBase CreateProjectReference(
             ProjectBase project, bool isPrivateSpecified, bool isPrivate);
 
+        /// <summary>
+        /// Compiles the specified solution configuration.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
+        /// <returns></returns>
         public bool Compile(Configuration solutionConfiguration) {
             ConfigurationBase projectConfig = BuildConfigurations[solutionConfiguration];
             if (projectConfig == null) {
@@ -316,6 +372,11 @@ namespace NAnt.VSNet {
             return (result != BuildResult.Failed);
         }
 
+        /// <summary>
+        /// Gets the output path.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
+        /// <returns></returns>
         public string GetOutputPath(Configuration solutionConfiguration) {
             // obtain project configuration (corresponding with solution configuration)
             ConfigurationBase config = BuildConfigurations[solutionConfiguration];
@@ -326,11 +387,21 @@ namespace NAnt.VSNet {
             return config.OutputPath;
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
+        /// <returns></returns>
         public ConfigurationBase GetConfiguration(Configuration solutionConfiguration) {
             // obtain project configuration (corresponding with solution configuration)
             return BuildConfigurations[solutionConfiguration];
         }
 
+        /// <summary>
+        /// Gets the assembly references.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
+        /// <returns></returns>
         public StringCollection GetAssemblyReferences(Configuration solutionConfiguration) {
             Hashtable uniqueReferences = CollectionsUtil.CreateCaseInsensitiveHashtable();
 
@@ -596,6 +667,11 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Builds the specified solution configuration.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
+        /// <returns></returns>
         protected abstract BuildResult Build(Configuration solutionConfiguration);
 
         /// <summary>
@@ -657,6 +733,15 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Executes the build event.
+        /// </summary>
+        /// <param name="buildEvent">The build event.</param>
+        /// <param name="buildCommandLine">The build command line.</param>
+        /// <param name="batchFile">The batch file.</param>
+        /// <param name="workingDirectory">The working directory.</param>
+        /// <param name="config">The configuration.</param>
+        /// <returns></returns>
         protected bool ExecuteBuildEvent(string buildEvent, string buildCommandLine, string batchFile, string workingDirectory, ConfigurationBase config) {
             // create the batch file
             using (StreamWriter sw = new StreamWriter(batchFile)) {
@@ -798,6 +883,9 @@ namespace NAnt.VSNet {
         SuccessOutputUpdated = 2,
     }
 
+    /// <summary>
+    /// Enumeration of knwon Visual Studio product versions.
+    /// </summary>
     public enum ProductVersion {
         /// <summary>
         /// Visual Studio.NET 2002

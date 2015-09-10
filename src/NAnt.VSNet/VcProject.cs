@@ -46,7 +46,19 @@ namespace NAnt.VSNet {
     /// </summary>
     public class VcProject: ProjectBase {
         #region Public Instance Constructors
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VcProject"/> class.
+        /// </summary>
+        /// <param name="solution">The solution.</param>
+        /// <param name="projectPath">The project path.</param>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="solutionTask">The solution task.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="refResolver">The reference resolver.</param>
+        /// <param name="outputDir">The output dir.</param>
+        /// <exception cref="System.ArgumentNullException">projectPath</exception>
         public VcProject(SolutionBase solution, string projectPath, XmlElement xmlDefinition, 
                 SolutionTask solutionTask, 
                 TempFileCollection tfc, 
@@ -218,10 +230,23 @@ namespace NAnt.VSNet {
             set { _guid = value; }
         }
 
+        /// <summary>
+        /// Gets the references.
+        /// </summary>
+        /// <value>
+        /// The references.
+        /// </value>
         public override ArrayList References {
             get { return _references; }
         }
 
+        /// <summary>
+        /// Creates the project reference.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <param name="isPrivateSpecified">if set to <c>true</c> [is private specified].</param>
+        /// <param name="isPrivate">if set to <c>true</c> [is private].</param>
+        /// <returns>The created project reference.</returns>
         public override ProjectReferenceBase CreateProjectReference(ProjectBase project, bool isPrivateSpecified, bool isPrivate) {
             return new VcProjectReference(project, this, isPrivateSpecified, 
                 isPrivate);
@@ -282,6 +307,11 @@ namespace NAnt.VSNet {
             return GetProductVersion(docElement);
         }
 
+        /// <summary>
+        /// Builds the specified solution configuration.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
+        /// <returns>The result of the build.</returns>
         protected override BuildResult Build(Configuration solutionConfiguration) {
             // prepare the project for build
             Prepare(solutionConfiguration);
@@ -445,6 +475,15 @@ namespace NAnt.VSNet {
 
         #region Protected Instance Methods
 
+        /// <summary>
+        /// Creates the reference.
+        /// </summary>
+        /// <param name="solution">The solution.</param>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException"> if <paramref name="solution"/> or <paramref name="xmlDefinition"/> is null.
+        /// </exception>
+        /// <exception cref="BuildException">If the reference type is unknwon.</exception>
         protected virtual ReferenceBase CreateReference(SolutionBase solution, XmlElement xmlDefinition) {
             if (solution == null) {
                 throw new ArgumentNullException("solution");
@@ -1820,6 +1859,11 @@ namespace NAnt.VSNet {
 
         #region Public Static Methods
 
+        /// <summary>
+        /// Loads the unique identifier.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <returns>The value of the attribute ProjectGUID.</returns>
         public static string LoadGuid(XmlElement xmlDefinition) {
             return xmlDefinition.GetAttribute("ProjectGUID");
         }

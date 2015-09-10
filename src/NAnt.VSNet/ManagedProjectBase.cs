@@ -39,9 +39,28 @@ using NAnt.Win32.Tasks;
 using NAnt.VSNet.Tasks;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Base class for a managed project.
+    /// </summary>
     public abstract class ManagedProjectBase : ProjectBase {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ManagedProjectBase"/> class.
+        /// </summary>
+        /// <param name="solution">The solution.</param>
+        /// <param name="projectPath">The project path.</param>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="solutionTask">The solution task.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="refResolver">The reference resolver.</param>
+        /// <param name="outputDir">The output dir.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// projectPath
+        /// or
+        /// xmlDefinition
+        /// </exception>
         protected ManagedProjectBase(SolutionBase solution, string projectPath, XmlElement xmlDefinition, SolutionTask solutionTask, TempFileCollection tfc, GacCache gacCache, ReferencesResolver refResolver, DirectoryInfo outputDir) : base(xmlDefinition, solutionTask, tfc, gacCache, refResolver, outputDir) {
             if (projectPath == null) {
                 throw new ArgumentNullException("projectPath");
@@ -152,6 +171,12 @@ namespace NAnt.VSNet {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets the project settings.
+        /// </summary>
+        /// <value>
+        /// The project settings.
+        /// </value>
         public ProjectSettings ProjectSettings {
             get { return _projectSettings; }
         }
@@ -253,6 +278,12 @@ namespace NAnt.VSNet {
             set { throw new InvalidOperationException( "It is not allowed to change the GUID of a C#/VB.NET project" ); }
         }
 
+        /// <summary>
+        /// Gets the references.
+        /// </summary>
+        /// <value>
+        /// The references.
+        /// </value>
         public override ArrayList References {
             get { return _references; }
         }
@@ -343,6 +374,11 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Builds the specified solution configuration.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
+        /// <returns></returns>
         protected override BuildResult Build(Configuration solutionConfiguration) {
             bool bSuccess = true;
             bool outputUpdated;
@@ -596,6 +632,17 @@ namespace NAnt.VSNet {
         /// </returns>
         protected abstract ProcessStartInfo GetProcessStartInfo(ConfigurationBase config, string responseFile);
 
+        /// <summary>
+        /// Creates the reference.
+        /// </summary>
+        /// <param name="solution">The solution.</param>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// solution
+        /// or
+        /// xmlDefinition
+        /// </exception>
         protected virtual ReferenceBase CreateReference(SolutionBase solution, XmlElement xmlDefinition) {
             if (solution == null) {
                 throw new ArgumentNullException("solution");
@@ -618,11 +665,23 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Creates the project reference.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <param name="isPrivateSpecified">if set to <c>true</c> [is private specified].</param>
+        /// <param name="isPrivate">if set to <c>true</c> [is private].</param>
+        /// <returns></returns>
         public override ProjectReferenceBase CreateProjectReference(ProjectBase project, bool isPrivateSpecified, bool isPrivate) {
             return new ManagedProjectReference(project, this, isPrivateSpecified, 
                 isPrivate);
         }
 
+        /// <summary>
+        /// Writes the compiler options.
+        /// </summary>
+        /// <param name="sw">The sw.</param>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
         protected virtual void WriteCompilerOptions(StreamWriter sw, Configuration solutionConfiguration) {
             // obtain project configuration (corresponding with solution configuration)
             ConfigurationSettings config = (ConfigurationSettings) BuildConfigurations[solutionConfiguration];
@@ -661,6 +720,10 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Writes the project options.
+        /// </summary>
+        /// <param name="sw">The sw.</param>
         protected virtual void WriteProjectOptions(StreamWriter sw) {
         }
 
@@ -1148,6 +1211,12 @@ namespace NAnt.VSNet {
 
         #region Public Static Methods
 
+        /// <summary>
+        /// Determines whether [is enterprise template project] [the specified file name].
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns></returns>
+        /// <exception cref="BuildException"></exception>
         public static bool IsEnterpriseTemplateProject(string fileName) {
             try {
                 using (StreamReader sr = new StreamReader(fileName, Encoding.Default, true)) {
@@ -1169,6 +1238,11 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Loads the unique identifier.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <returns></returns>
         public static string LoadGuid(XmlElement xmlDefinition)
         {
             XmlReader guidReader = new XmlNodeReader(xmlDefinition);

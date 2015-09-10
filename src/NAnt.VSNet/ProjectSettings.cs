@@ -28,9 +28,19 @@ using NAnt.Core;
 using NAnt.Core.Util;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Project settings implementation.
+    /// </summary>
     public class ProjectSettings {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectSettings"/> class.
+        /// </summary>
+        /// <param name="elemRoot">The elem root.</param>
+        /// <param name="elemSettings">The elem settings.</param>
+        /// <param name="project">The project.</param>
+        /// <exception cref="BuildException"></exception>
         public ProjectSettings(XmlElement elemRoot, XmlElement elemSettings, ManagedProjectBase project) {
             _project = project;
             _settings = new ArrayList();
@@ -155,6 +165,12 @@ namespace NAnt.VSNet {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets the settings.
+        /// </summary>
+        /// <value>
+        /// The settings.
+        /// </value>
         public string[] Settings {
             get { return (string[]) _settings.ToArray(typeof(string)); }
         }
@@ -170,6 +186,12 @@ namespace NAnt.VSNet {
             get { return _applicationIcon; }
         }
 
+        /// <summary>
+        /// Gets the name of the assembly.
+        /// </summary>
+        /// <value>
+        /// The name of the assembly.
+        /// </value>
         public string AssemblyName {
             get { return _assemblyName; }
         }
@@ -198,10 +220,22 @@ namespace NAnt.VSNet {
             get { return _assemblyKeyContainerName; }
         }
 
+        /// <summary>
+        /// Gets the temporary files.
+        /// </summary>
+        /// <value>
+        /// The temporary files.
+        /// </value>
         public TempFileCollection TemporaryFiles {
             get { return Project.TemporaryFiles; }
         }
 
+        /// <summary>
+        /// Gets the name of the output file.
+        /// </summary>
+        /// <value>
+        /// The name of the output file.
+        /// </value>
         public string OutputFileName {
             get { return string.Concat(AssemblyName, OutputExtension); }
         }
@@ -213,6 +247,12 @@ namespace NAnt.VSNet {
             get { return _outputType; }
         }
 
+        /// <summary>
+        /// Gets the output extension.
+        /// </summary>
+        /// <value>
+        /// The output extension.
+        /// </value>
         public string OutputExtension {
             get { 
                 switch (OutputType) {
@@ -226,10 +266,22 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Gets the root namespace.
+        /// </summary>
+        /// <value>
+        /// The root namespace.
+        /// </value>
         public string RootNamespace {
             get { return _rootNamespace; }
         }
 
+        /// <summary>
+        /// Gets the unique identifier.
+        /// </summary>
+        /// <value>
+        /// The unique identifier.
+        /// </value>
         public string Guid {
             get { return _guid; }
         }
@@ -343,6 +395,11 @@ namespace NAnt.VSNet {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Gets the temporary filename.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns>The path to the temporary file name.</returns>
         public string GetTemporaryFilename(string fileName) {
             return FileUtils.CombinePaths(TemporaryFiles.BasePath, fileName);
         }

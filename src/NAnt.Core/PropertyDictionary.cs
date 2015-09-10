@@ -84,11 +84,21 @@ namespace NAnt.Core {
 
         #region Override implementation of DictionaryBase
 
+        /// <summary>
+        /// Performs additional custom processes before clearing the contents of the <see cref="T:System.Collections.DictionaryBase" /> instance.
+        /// </summary>
         protected override void OnClear() {
             _readOnlyProperties.Clear();
             _dynamicProperties.Clear();
         }
 
+        /// <summary>
+        /// Performs additional custom processes before setting a value in the <see cref="T:System.Collections.DictionaryBase" /> instance.
+        /// </summary>
+        /// <param name="key">The key of the element to locate.</param>
+        /// <param name="oldValue">The old value of the element associated with <paramref name="key" />.</param>
+        /// <param name="newValue">The new value of the element associated with <paramref name="key" />.</param>
+        /// <exception cref="BuildException"></exception>
         protected override void OnSet(object key, object oldValue, object newValue) {
             // at this point we're sure the key is valid, as it has already
             // been verified by OnValidate

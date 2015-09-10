@@ -82,6 +82,9 @@ namespace NAnt.Core {
             _unscannedNames.Add(fileName);
         }
 
+        /// <summary>
+        /// Clears this instance.
+        /// </summary>
         public void Clear() {
             _unscannedNames.Clear();
         }

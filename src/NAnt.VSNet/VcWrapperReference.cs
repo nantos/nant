@@ -29,9 +29,20 @@ using NAnt.Core.Util;
 using NAnt.Win32.Tasks;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Wrapper vor VC references.
+    /// </summary>
     public class VcWrapperReference : WrapperReferenceBase {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VcWrapperReference"/> class.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="referencesResolver">The references resolver.</param>
+        /// <param name="parent">The parent.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <exception cref="BuildException"></exception>
         public VcWrapperReference(XmlElement xmlDefinition, ReferencesResolver referencesResolver, ProjectBase parent, GacCache gacCache) : base(xmlDefinition, referencesResolver, parent, gacCache) {
             // determine name of type library
             _name = GetTypeLibraryName(GetTypeLibrary());
@@ -166,6 +177,9 @@ namespace NAnt.VSNet {
 
         #region Private Instance Methods
 
+        /// <summary>
+        /// Imports the type library.
+        /// </summary>
         protected override void ImportTypeLibrary() {
             TlbImpTask tlbImp = new TlbImpTask();
 
@@ -236,6 +250,9 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Imports the active x library.
+        /// </summary>
         protected override void ImportActiveXLibrary() {
             AxImpTask axImp = new AxImpTask();
 

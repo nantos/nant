@@ -23,6 +23,9 @@ using System.IO;
 using NUnit.Framework;
 
 namespace NAnt.NUnit1.Types {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IResultFormatter : ITestListener {
         /// <summary>
         /// The whole test suite started.

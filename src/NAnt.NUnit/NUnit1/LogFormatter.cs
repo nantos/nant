@@ -32,6 +32,11 @@ namespace NAnt.NUnit1.Types {
     public class LogFormatter : IResultFormatter {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogFormatter"/> class.
+        /// </summary>
+        /// <param name="prefix">The prefix.</param>
+        /// <param name="verbose">if set to <c>true</c> [verbose].</param>
         public LogFormatter(string prefix, bool verbose) {
             if (prefix != null) {
                 _prefix = prefix;
@@ -45,10 +50,22 @@ namespace NAnt.NUnit1.Types {
 
         #region Protected Instance Properties
 
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="LogFormatter"/> is verbose.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if verbose; otherwise, <c>false</c>.
+        /// </value>
         protected bool Verbose {
             get { return _verbose; }
         }
 
+        /// <summary>
+        /// Gets the prefix.
+        /// </summary>
+        /// <value>
+        /// The prefix.
+        /// </value>
         protected string Prefix {
             get { return _prefix; }
         }
@@ -84,6 +101,11 @@ namespace NAnt.NUnit1.Types {
 
         #region Implementation of ITestListener
 
+        /// <summary>
+        /// Adds the error.
+        /// </summary>
+        /// <param name="test">The test.</param>
+        /// <param name="e">The e.</param>
         public void AddError(ITest test, Exception e) {
             Console.WriteLine(Prefix + "ERROR: " + GetTestSummary(test));
             Console.WriteLine(FormatError(e.StackTrace, e.Message));
@@ -92,6 +114,11 @@ namespace NAnt.NUnit1.Types {
             }
         }
 
+        /// <summary>
+        /// Adds the failure.
+        /// </summary>
+        /// <param name="test">The test.</param>
+        /// <param name="e">The e.</param>
         public void AddFailure(ITest test, AssertionFailedError e) {
             Console.WriteLine(Prefix + "FAILURE: " + GetTestSummary(test));
             Console.WriteLine(FormatError(e.StackTrace, e.Message));
@@ -100,12 +127,20 @@ namespace NAnt.NUnit1.Types {
             }
         }
 
+        /// <summary>
+        /// Starts the test.
+        /// </summary>
+        /// <param name="test">The test.</param>
         public void StartTest(ITest test) {
             if (Verbose) {
                 Console.WriteLine(Prefix + GetTestSummary(test));
             }
         }
 
+        /// <summary>
+        /// Ends the test.
+        /// </summary>
+        /// <param name="test">The test.</param>
         public void EndTest(ITest test) {
         }
 

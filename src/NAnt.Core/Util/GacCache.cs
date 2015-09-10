@@ -51,6 +51,9 @@ namespace NAnt.Core.Util {
 
         #region Public Instance Destructors
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="GacCache"/> class.
+        /// </summary>
         ~GacCache() {
             Dispose(false);
         }
@@ -115,6 +118,9 @@ namespace NAnt.Core.Util {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Recreates the domain.
+        /// </summary>
         public void RecreateDomain() {
             // don't recreate this domain unless it has actually loaded an assembly
             if (!_hasLoadedAssembly && _domain != null)

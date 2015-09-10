@@ -21,6 +21,9 @@ using System;
 using System.Runtime.Serialization;
 
 namespace NAnt.Core {
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public class ExpressionParseException : Exception {
 
@@ -47,29 +50,69 @@ namespace NAnt.Core {
             get { return _endPos; }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionParseException"/> class.
+        /// </summary>
         public ExpressionParseException() : base () {}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionParseException"/> class.
+        /// </summary>
+        /// <param name="message">The message that describes the error.</param>
         public ExpressionParseException(string message) : base(message, null) {}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionParseException"/> class.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="inner">The inner.</param>
         public ExpressionParseException(string message, Exception inner) : base(message, inner) {}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionParseException"/> class.
+        /// </summary>
+        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
         protected ExpressionParseException(SerializationInfo info, StreamingContext context) : base(info, context) {
             _startPos = (int)info.GetValue("startPos", typeof(int));
             _endPos = (int)info.GetValue("endPos", typeof(int));
         }
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionParseException"/> class.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="pos">The position.</param>
         public ExpressionParseException(string message, int pos) : base(message, null) {
             _startPos = pos;
             _endPos = -1;
         }
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionParseException"/> class.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="startPos">The start position.</param>
+        /// <param name="endPos">The end position.</param>
         public ExpressionParseException(string message, int startPos, int endPos) : base(message, null) {
             _startPos = startPos;
             _endPos = endPos;
         }
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionParseException"/> class.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="startPos">The start position.</param>
+        /// <param name="endPos">The end position.</param>
+        /// <param name="inner">The inner.</param>
         public ExpressionParseException(string message, int startPos, int endPos, Exception inner) : base(message, inner) {
             _startPos = startPos;
             _endPos = endPos;
         }
-        
+
+        /// <summary>
+        /// When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception.
+        /// </summary>
+        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
         public override void GetObjectData(SerializationInfo info, StreamingContext context) {
             info.AddValue("startPos", _startPos);
             info.AddValue("endPos", _endPos);

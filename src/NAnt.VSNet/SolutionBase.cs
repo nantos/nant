@@ -33,9 +33,19 @@ using NAnt.VSNet.Tasks;
 using NAnt.VSNet.Types;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Base class for Visual Studio solutions.
+    /// </summary>
     public abstract class SolutionBase {
         #region Protected Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SolutionBase"/> class.
+        /// </summary>
+        /// <param name="solutionTask">The solution task.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="refResolver">The reference resolver.</param>
         protected SolutionBase(SolutionTask solutionTask, TempFileCollection tfc, GacCache gacCache, ReferencesResolver refResolver) : this(tfc, solutionTask) {
             if (solutionTask.SolutionFile != null) {
                 _file = solutionTask.SolutionFile;
@@ -64,10 +74,22 @@ namespace NAnt.VSNet {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets the file.
+        /// </summary>
+        /// <value>
+        /// The file.
+        /// </value>
         public FileInfo File {
             get { return _file; }
         }
 
+        /// <summary>
+        /// Gets the temporary files.
+        /// </summary>
+        /// <value>
+        /// The temporary files.
+        /// </value>
         public TempFileCollection TemporaryFiles {
             get { return _tfc; }
         }
@@ -76,10 +98,22 @@ namespace NAnt.VSNet {
 
         #region Protected Instance Properties {
 
+        /// <summary>
+        /// Gets the web maps.
+        /// </summary>
+        /// <value>
+        /// The web maps.
+        /// </value>
         protected WebMapCollection WebMaps {
             get { return _webMaps; }
         }
 
+        /// <summary>
+        /// Gets the project entries.
+        /// </summary>
+        /// <value>
+        /// The project entries.
+        /// </value>
         public ProjectEntryCollection ProjectEntries {
             get { return _projectEntries; }
         }
@@ -88,6 +122,11 @@ namespace NAnt.VSNet {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Recursives the load template project.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <exception cref="BuildException"></exception>
         public void RecursiveLoadTemplateProject(string fileName) {
             XmlDocument doc = _solutionTask.ProjectFactory.LoadProjectXml(fileName);
 
@@ -176,6 +215,12 @@ namespace NAnt.VSNet {
             return projectEntry.Path;
         }
 
+        /// <summary>
+        /// Gets the project from unique identifier.
+        /// </summary>
+        /// <param name="projectGuid">The project unique identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="BuildException"></exception>
         public ProjectBase GetProjectFromGuid(string projectGuid) {
             ProjectEntry projectEntry = ProjectEntries[projectGuid];
             if (projectEntry == null || projectEntry.Project == null) {
@@ -186,6 +231,14 @@ namespace NAnt.VSNet {
             return projectEntry.Project;
         }
 
+        /// <summary>
+        /// Compiles the specified solution configuration.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
+        /// <returns></returns>
+        /// <exception cref="BuildException">
+        /// Circular dependency detected.
+        /// </exception>
         public bool Compile(Configuration solutionConfiguration) {
             Hashtable htProjectsDone = CollectionsUtil.CreateCaseInsensitiveHashtable();
             Hashtable htFailedProjects = CollectionsUtil.CreateCaseInsensitiveHashtable();
@@ -325,6 +378,12 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Loads the project guids.
+        /// </summary>
+        /// <param name="projects">The projects.</param>
+        /// <param name="isReferenceProject">if set to <c>true</c> [is reference project].</param>
+        /// <exception cref="BuildException"></exception>
         protected void LoadProjectGuids(ArrayList projects, bool isReferenceProject) {
             foreach (string projectFileName in projects) {
                 string projectGuid = _solutionTask.ProjectFactory.LoadGuid(projectFileName);
@@ -444,6 +503,10 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Gets the dependencies from projects.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
         protected void GetDependenciesFromProjects(Configuration solutionConfiguration) {
             Log(Level.Verbose, "Gathering additional dependencies...");
 
@@ -725,11 +788,20 @@ namespace NAnt.VSNet {
             return referencesFailedProject;
         }
 
+        /// <summary>
+        /// Creates the project does not exist exception.
+        /// </summary>
+        /// <param name="projectPath">The project path.</param>
+        /// <returns></returns>
         protected BuildException CreateProjectDoesNotExistException(string projectPath) {
             return new BuildException(string.Format(CultureInfo.InvariantCulture,
                 "Project '{0}' does not exist.", projectPath));
         }
 
+        /// <summary>
+        /// Sets the project build configuration.
+        /// </summary>
+        /// <param name="projectEntry">The project entry.</param>
         protected virtual void SetProjectBuildConfiguration(ProjectEntry projectEntry) { 
             if (projectEntry.BuildConfigurations == null) {
                 // project was not loaded from solution file, and as a result

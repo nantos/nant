@@ -23,6 +23,9 @@ using System.Collections.Specialized;
 using System.Globalization;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class ConfigurationDictionary : IDictionary, ICollection, IEnumerable {
         #region Private Instance Fields
 
@@ -51,6 +54,10 @@ namespace NAnt.VSNet {
 
         #region Implementation of IDictionary
 
+        /// <summary>
+        /// Gets the enumerator.
+        /// </summary>
+        /// <returns></returns>
         public ConfigurationDictionaryEnumerator GetEnumerator() {
             return new ConfigurationDictionaryEnumerator(this);
         }
@@ -63,6 +70,10 @@ namespace NAnt.VSNet {
             return GetEnumerator();
         }
 
+        /// <summary>
+        /// Removes the specified configuration.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
         public void Remove(Configuration configuration) {
             _innerHash.Remove(configuration);
         }
@@ -71,6 +82,11 @@ namespace NAnt.VSNet {
             Remove((Configuration) key);
         }
 
+        /// <summary>
+        /// Determines whether [contains] [the specified key].
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         public bool Contains(Configuration key) {
             return _innerHash.Contains(key);
         }
@@ -79,10 +95,18 @@ namespace NAnt.VSNet {
             return Contains((Configuration) key);
         }
 
+        /// <summary>
+        /// Removes all elements from the <see cref="T:System.Collections.IDictionary" /> object.
+        /// </summary>
         public void Clear() {
             _innerHash.Clear();      
         }
 
+        /// <summary>
+        /// Adds the specified key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
         public void Add(Configuration key, ConfigurationBase value) {
             _innerHash.Add (key, value);
         }
@@ -91,10 +115,21 @@ namespace NAnt.VSNet {
             Add((Configuration) key, (ConfigurationBase) value);
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the <see cref="T:System.Collections.IDictionary" /> object is read-only.
+        /// </summary>
         public bool IsReadOnly {
             get { return _innerHash.IsReadOnly; }
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="ConfigurationBase"/> with the specified key.
+        /// </summary>
+        /// <value>
+        /// The <see cref="ConfigurationBase"/>.
+        /// </value>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         public ConfigurationBase this[Configuration key] {
             get {
                 ConfigurationBase foundConfig = (ConfigurationBase) _innerHash[key];
@@ -126,15 +161,24 @@ namespace NAnt.VSNet {
             get { return this[(Configuration) key]; }
             set { this[(Configuration) key] = (ConfigurationBase) value; }
         }
-        
+
+        /// <summary>
+        /// Gets an <see cref="T:System.Collections.ICollection" /> object containing the values in the <see cref="T:System.Collections.IDictionary" /> object.
+        /// </summary>
         public ICollection Values {
             get { return _innerHash.Values; }
         }
 
+        /// <summary>
+        /// Gets an <see cref="T:System.Collections.ICollection" /> object containing the keys of the <see cref="T:System.Collections.IDictionary" /> object.
+        /// </summary>
         public ICollection Keys {
             get { return _innerHash.Keys; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the <see cref="T:System.Collections.IDictionary" /> object has a fixed size.
+        /// </summary>
         public bool IsFixedSize {
             get { return _innerHash.IsFixedSize; }
         }
@@ -147,14 +191,23 @@ namespace NAnt.VSNet {
             _innerHash.CopyTo(array, index);
         }
 
+        /// <summary>
+        /// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" /> is synchronized (thread safe).
+        /// </summary>
         public bool IsSynchronized {
             get { return _innerHash.IsSynchronized; }
         }
 
+        /// <summary>
+        /// Gets the number of elements contained in the <see cref="T:System.Collections.ICollection" />.
+        /// </summary>
         public int Count {
             get { return _innerHash.Count; }
         }
 
+        /// <summary>
+        /// Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />.
+        /// </summary>
         public object SyncRoot {
             get { return _innerHash.SyncRoot; }
         }
@@ -163,17 +216,30 @@ namespace NAnt.VSNet {
 
         #region HashTable Methods
 
+        /// <summary>
+        /// Determines whether the specified key contains key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         public bool ContainsKey (Configuration key) {
             return _innerHash.ContainsKey(key);
         }
 
+        /// <summary>
+        /// Determines whether the specified value contains value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public bool ContainsValue(ConfigurationBase value) {
             return _innerHash.ContainsValue(value);
         }
 
         #endregion HashTable Methods
     }
-    
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class ConfigurationDictionaryEnumerator : IDictionaryEnumerator {
         #region Private Instance Fields
 
@@ -191,6 +257,9 @@ namespace NAnt.VSNet {
 
         #region Implementation of IDictionaryEnumerator
 
+        /// <summary>
+        /// Gets the key of the current dictionary entry.
+        /// </summary>
         public Configuration Key {
             get { return (Configuration) _innerEnumerator.Key; }
         }
@@ -199,6 +268,9 @@ namespace NAnt.VSNet {
             get { return Key; }
         }
 
+        /// <summary>
+        /// Gets the value of the current dictionary entry.
+        /// </summary>
         public ConfigurationBase Value {
             get { return (ConfigurationBase) _innerEnumerator.Value; }
         }
@@ -207,6 +279,9 @@ namespace NAnt.VSNet {
             get { return Value; }
         }
 
+        /// <summary>
+        /// Gets both the key and the value of the current dictionary entry.
+        /// </summary>
         public DictionaryEntry Entry {
             get { return new DictionaryEntry (Key, Value); }
         }
@@ -215,10 +290,19 @@ namespace NAnt.VSNet {
 
         #region Implementation of IEnumerator
 
+        /// <summary>
+        /// Sets the enumerator to its initial position, which is before the first element in the collection.
+        /// </summary>
         public void Reset() {
             _innerEnumerator.Reset();
         }
 
+        /// <summary>
+        /// Advances the enumerator to the next element of the collection.
+        /// </summary>
+        /// <returns>
+        /// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+        /// </returns>
         public bool MoveNext() {
             return _innerEnumerator.MoveNext();
         }
@@ -227,6 +311,9 @@ namespace NAnt.VSNet {
             get { return Current; }
         }
 
+        /// <summary>
+        /// Gets the current element in the collection.
+        /// </summary>
         public ConfigurationDictionaryEntry Current {
             get { return new ConfigurationDictionaryEntry (Key, Value); }
         }
@@ -234,6 +321,9 @@ namespace NAnt.VSNet {
         #endregion Implementation of IEnumerator
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class ConfigurationDictionaryEntry {
         private readonly Configuration _name;
         private readonly ConfigurationBase _config;
@@ -243,10 +333,22 @@ namespace NAnt.VSNet {
             _config = config;
         }
 
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
         public Configuration Name {
             get { return _name; }
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        /// <value>
+        /// The configuration.
+        /// </value>
         public ConfigurationBase Config {
             get { return _config; }
         }

@@ -28,9 +28,22 @@ using NAnt.Core.Util;
 using NAnt.Win32.Tasks;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Class for handling manged wrapper references.
+    /// </summary>
     public class ManagedWrapperReference : WrapperReferenceBase {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ManagedWrapperReference"/> class.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="referencesResolver">The references resolver.</param>
+        /// <param name="parent">The parent.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="projectSettings">The project settings.</param>
+        /// <exception cref="System.ArgumentNullException">projectSettings</exception>
+        /// <exception cref="BuildException"></exception>
         public ManagedWrapperReference(XmlElement xmlDefinition, ReferencesResolver referencesResolver, ProjectBase parent, GacCache gacCache, ProjectSettings projectSettings) : base(xmlDefinition, referencesResolver, parent, gacCache) {
             if (projectSettings == null) {
                 throw new ArgumentNullException("projectSettings");
@@ -204,6 +217,9 @@ namespace NAnt.VSNet {
 
         #region Private Instance Methods
 
+        /// <summary>
+        /// Imports the type library.
+        /// </summary>
         protected override void ImportTypeLibrary() {
             TlbImpTask tlbImp = new TlbImpTask();
 
@@ -296,6 +312,9 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Imports the active x library.
+        /// </summary>
         protected override void ImportActiveXLibrary() {
             AxImpTask axImp = new AxImpTask();
 

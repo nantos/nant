@@ -199,10 +199,24 @@ namespace NAnt.Core.Filters {
         /// been specified in the build file.
         /// </summary>
         public class FilterChainConfigurator : AttributeConfigurator {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="FilterChainConfigurator"/> class.
+            /// </summary>
+            /// <param name="element">The <see cref="Element" /> for which an <see cref="Element.AttributeConfigurator" /> should be created.</param>
+            /// <param name="elementNode">The <see cref="XmlNode" /> to initialize the <see cref="Element" /> with.</param>
+            /// <param name="properties">The <see cref="PropertyDictionary" /> to use for property expansion.</param>
+            /// <param name="targetFramework">The framework that the <see cref="Element" /> should target.</param>
             public FilterChainConfigurator(Element element, XmlNode elementNode, PropertyDictionary properties, FrameworkInfo targetFramework) 
                 : base(element, elementNode, properties, targetFramework) {
             }
 
+            /// <summary>
+            /// Initializes the build element collection.
+            /// </summary>
+            /// <param name="propertyInfo">The property information.</param>
+            /// <returns></returns>
+            /// <exception cref="BuildException">
+            /// </exception>
             protected override bool InitializeBuildElementCollection(System.Reflection.PropertyInfo propertyInfo) {
                 Type elementType = typeof(Filter);
 

@@ -225,6 +225,13 @@ namespace NAnt.VSNet {
             return setting;
         }
 
+        /// <summary>
+        /// Gets the tool arguments.
+        /// </summary>
+        /// <param name="toolName">Name of the tool.</param>
+        /// <param name="argMap">The argument map.</param>
+        /// <param name="ignoreGroup">The ignore group.</param>
+        /// <returns>A hanstable containing the tool arguments.</returns>
         public override Hashtable GetToolArguments(string toolName, VcArgumentMap argMap, VcArgumentMap.ArgGroup ignoreGroup) {
             ExpansionHandler expander = new ExpansionHandler(ExpandMacros);
 

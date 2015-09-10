@@ -297,6 +297,12 @@ namespace NAnt.Core {
             get { return _targets; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether [use jobs].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [use jobs]; otherwise, <c>false</c>.
+        /// </value>
         [CommandLineArgument(CommandLineArgumentTypes.AtMostOnce, Name = "jobs", ShortName = "j", Description = "Starts targets as parallel jobs")]
         public bool UseJobs {
             get { return _useJobs; }

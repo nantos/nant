@@ -30,6 +30,9 @@ namespace NAnt.NUnit1.Types {
     public class PlainTextFormatter : IResultFormatter {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlainTextFormatter"/> class.
+        /// </summary>
         public PlainTextFormatter() {
         }
 
@@ -37,6 +40,12 @@ namespace NAnt.NUnit1.Types {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets or sets the writer.
+        /// </summary>
+        /// <value>
+        /// The writer.
+        /// </value>
         public TextWriter Writer {
             get { return _writer; }
             set { _writer = value; }
@@ -72,21 +81,39 @@ namespace NAnt.NUnit1.Types {
 
         #region Implementation of ITestListener
 
+        /// <summary>
+        /// Adds the error.
+        /// </summary>
+        /// <param name="test">The test.</param>
+        /// <param name="e">The e.</param>
         public void AddError(ITest test, Exception e) {
             Writer.WriteLine("ERROR: " + test.ToString());
             Writer.WriteLine(FormatError(e.StackTrace, e.Message));
         }
 
+        /// <summary>
+        /// Adds the failure.
+        /// </summary>
+        /// <param name="test">The test.</param>
+        /// <param name="e">The e.</param>
         public void AddFailure(ITest test, AssertionFailedError e) {
             Writer.WriteLine("FAILURE: " + test.ToString());
             Writer.WriteLine(FormatError(e.StackTrace, e.Message));
         }
 
+        /// <summary>
+        /// Starts the test.
+        /// </summary>
+        /// <param name="test">The test.</param>
         public void StartTest(ITest test) {
             // TODO: the output from ToString is hard to read, change this to output ClassName.TestName
             Writer.WriteLine(test.ToString());
         }
 
+        /// <summary>
+        /// Ends the test.
+        /// </summary>
+        /// <param name="test">The test.</param>
         public void EndTest(ITest test) {
         }
 

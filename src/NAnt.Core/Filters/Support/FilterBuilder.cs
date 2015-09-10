@@ -26,6 +26,9 @@ using NAnt.Core.Attributes;
 using NAnt.Core.Extensibility;
 
 namespace NAnt.Core.Filters {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FilterBuilder : ExtensionBuilder {
         #region Public Instance Constructors
 
@@ -98,6 +101,10 @@ namespace NAnt.Core.Filters {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Creates the filter.
+        /// </summary>
+        /// <returns></returns>
         [ReflectionPermission(SecurityAction.Demand, Flags=ReflectionPermissionFlag.NoFlags)]
         public Filter CreateFilter() {
             return (Filter) Assembly.CreateInstance(

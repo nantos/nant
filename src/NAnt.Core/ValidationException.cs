@@ -21,6 +21,9 @@ using System;
 using System.Runtime.Serialization;
 
 namespace NAnt.Core {
+    /// <summary>
+    /// Implementation of the validation exception.
+    /// </summary>
     [Serializable()]
     public class ValidationException : BuildException {
         #region Public Instance Constructors

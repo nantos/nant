@@ -24,9 +24,24 @@ using System.Xml;
 using NAnt.Core.Util;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Implementation of a VC project reference.
+    /// </summary>
     public class VcProjectReference : ProjectReferenceBase {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VcProjectReference"/> class.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="referencesResolver">The references resolver.</param>
+        /// <param name="parent">The parent.</param>
+        /// <param name="solution">The solution.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="outputDir">The output dir.</param>
+        /// <exception cref="System.ArgumentNullException">if <paramref name="xmlDefinition"/>, <paramref name="solution"/>, <paramref name="tfc"/> or <paramref name="gacCache"/> is null.
+        /// </exception>
         public VcProjectReference(XmlElement xmlDefinition, ReferencesResolver referencesResolver, ProjectBase parent, SolutionBase solution, TempFileCollection tfc, GacCache gacCache, DirectoryInfo outputDir) : base(referencesResolver, parent) {
             if (xmlDefinition == null) {
                 throw new ArgumentNullException("xmlDefinition");
@@ -55,6 +70,13 @@ namespace NAnt.VSNet {
             _project = LoadProject(solution, tfc, gacCache, outputDir, projectFile);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VcProjectReference"/> class.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <param name="parent">The parent.</param>
+        /// <param name="isPrivateSpecified">if set to <c>true</c> [is private specified].</param>
+        /// <param name="isPrivate">if set to <c>true</c> [is private].</param>
         public VcProjectReference(ProjectBase project, ProjectBase parent, bool isPrivateSpecified, bool isPrivate) : base(project.ReferencesResolver, parent) {
             _project = project;
             _isPrivateSpecified = isPrivateSpecified;
@@ -82,14 +104,32 @@ namespace NAnt.VSNet {
 
         #region Override implementation of ProjectReferenceBase
 
+        /// <summary>
+        /// Gets the project.
+        /// </summary>
+        /// <value>
+        /// The project.
+        /// </value>
         public override ProjectBase Project {
             get { return _project; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is private.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is private; otherwise, <c>false</c>.
+        /// </value>
         protected override bool IsPrivate {
             get { return _isPrivate; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is private specified.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is private specified; otherwise, <c>false</c>.
+        /// </value>
         protected override bool IsPrivateSpecified {
             get { return _isPrivateSpecified; }
         }

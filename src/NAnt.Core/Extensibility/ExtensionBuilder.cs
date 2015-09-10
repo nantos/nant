@@ -21,6 +21,9 @@ using System;
 using System.Reflection;
 
 namespace NAnt.Core.Extensibility {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class ExtensionBuilder {
         /// <summary>
         /// Initializes a instance of the <see cref="ExtensionBuilder" /> 

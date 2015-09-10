@@ -137,18 +137,37 @@ namespace NAnt.Core {
             }
         }
 
+        /// <summary>
+        /// Creates the child task.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns>The created <see cref="Task"/> instance.</returns>
         protected virtual Task CreateChildTask(XmlNode node) {
             return Project.CreateTask(node);
         }
 
+        /// <summary>
+        /// Creates the child data type base.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns>The created <see cref="DataTypeBase"/> instance.</returns>
         protected virtual DataTypeBase CreateChildDataTypeBase(XmlNode node) {
             return Project.CreateDataTypeBase(node);
         }
-        
+
+        /// <summary>
+        /// Determines whether the specified node is a private XML element.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns><c>true</c> if the specified node is a private XML element; otherwise <c>false</c>.</returns>
         protected virtual bool IsPrivateXmlElement(XmlNode node) {
             return (_subXMLElements != null && _subXMLElements.Contains(node.Name));
         }
 
+        /// <summary>
+        /// Adds the name of the private XML element.
+        /// </summary>
+        /// <param name="name">The name.</param>
         protected virtual void AddPrivateXmlElementName(string name) {
             if (_subXMLElements == null) {
                 _subXMLElements = new StringCollection();

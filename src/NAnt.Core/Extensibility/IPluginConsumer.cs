@@ -18,7 +18,14 @@
 // Gert Driesen (drieseng@users.sourceforge.net.be)
 
 namespace NAnt.Core.Extensibility {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IPluginConsumer {
+        /// <summary>
+        /// Consumes the plugin.
+        /// </summary>
+        /// <param name="type">The type.</param>
         void ConsumePlugin(IPlugin type);
     }
 }

@@ -30,15 +30,34 @@ using NAnt.NUnit.Types;
 using NAnt.NUnit1.Types;
 
 namespace NAnt.NUnit1.Tasks {
+    /// <summary>
+    /// The result of a test run.
+    /// </summary>
     public enum RunnerResult {
+        /// <summary>
+        /// Tests executed successfully.
+        /// </summary>
         Success,
+        /// <summary>
+        /// Tests exeuted with failures.
+        /// </summary>
         Failures,
+        /// <summary>
+        /// Tests exeuted with errors.
+        /// </summary>
         Errors,
     }
 
+    /// <summary>
+    /// Class for executing NUnit tests.
+    /// </summary>
     public class NUnitTestRunner : BaseTestRunner {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NUnitTestRunner"/> class.
+        /// </summary>
+        /// <param name="testData">The test data.</param>
         public NUnitTestRunner(NUnitTestData testData) {
             _nunittest = testData;
             string nunitsuite = testData.Class + "," + testData.Assembly;
@@ -70,6 +89,10 @@ namespace NAnt.NUnit1.Tasks {
 
         #region Override implementation of BaseTestRunner
 
+        /// <summary>
+        /// Runs the failed.
+        /// </summary>
+        /// <param name="message">The message.</param>
         protected override void RunFailed(string message) {
         }
 
@@ -77,6 +100,11 @@ namespace NAnt.NUnit1.Tasks {
 
         #region Override implementation of IListener
 
+        /// <summary>
+        /// Adds the error.
+        /// </summary>
+        /// <param name="test">The test.</param>
+        /// <param name="t">The t.</param>
         public override void AddError(ITest test, Exception t) {
             foreach (IResultFormatter formatter in Formatters) {
                 formatter.AddError(test, t);
@@ -87,6 +115,11 @@ namespace NAnt.NUnit1.Tasks {
             }
         }
 
+        /// <summary>
+        /// Adds the failure.
+        /// </summary>
+        /// <param name="test">The test.</param>
+        /// <param name="t">The t.</param>
         public override void AddFailure(ITest test, AssertionFailedError t) {
             foreach (IResultFormatter formatter in Formatters) {
                 formatter.AddFailure(test, t);
@@ -97,12 +130,20 @@ namespace NAnt.NUnit1.Tasks {
             }
         }
 
+        /// <summary>
+        /// Starts the test.
+        /// </summary>
+        /// <param name="test">The test.</param>
         public override void StartTest(ITest test) {
             foreach (IResultFormatter formatter in Formatters) {
                 formatter.StartTest(test);
             }
         }
 
+        /// <summary>
+        /// Ends the test.
+        /// </summary>
+        /// <param name="test">The test.</param>
         public override void EndTest(ITest test) {
             foreach (IResultFormatter formatter in Formatters) {
                 formatter.EndTest(test);
@@ -232,6 +273,12 @@ namespace NAnt.NUnit1.Tasks {
             return null;
         }
 
+        /// <summary>
+        /// Creates the formatter.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="outfile">The outfile.</param>
+        /// <returns></returns>
         protected IResultFormatter CreateFormatter(FormatterType type, FileInfo outfile) {
             IResultFormatter retFormatter = null;
 

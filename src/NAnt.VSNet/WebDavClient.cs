@@ -22,9 +22,16 @@ using System.IO;
 using System.Net;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Implementation of a WebDAV client.
+    /// </summary>
     public class WebDavClient {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebDavClient"/> class.
+        /// </summary>
+        /// <param name="uriBase">The URI base.</param>
         public WebDavClient(Uri uriBase) {
             _webProjectBaseUrl = uriBase.ToString();
         }
@@ -33,6 +40,11 @@ namespace NAnt.VSNet {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Uploads the file.
+        /// </summary>
+        /// <param name="localFileName">Name of the local file.</param>
+        /// <param name="remoteFileName">Name of the remote file.</param>
         public void UploadFile(string localFileName, string remoteFileName) {
             WebRequest request = WebRequest.Create(_webProjectBaseUrl + "/" + remoteFileName);
             request.Method = "PUT";
@@ -68,6 +80,11 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Deletes the file.
+        /// </summary>
+        /// <param name="localFileName">Name of the local file.</param>
+        /// <param name="remoteFileName">Name of the remote file.</param>
         public void DeleteFile(string localFileName, string remoteFileName) {
             WebRequest request = WebRequest.Create(_webProjectBaseUrl + "/" + remoteFileName);
             request.Method = "DELETE";
@@ -78,6 +95,11 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Downloads the file.
+        /// </summary>
+        /// <param name="localFileName">Name of the local file.</param>
+        /// <param name="remoteFileName">Name of the remote file.</param>
         public void DownloadFile(string localFileName, string remoteFileName) {
             WebRequest request = WebRequest.Create(_webProjectBaseUrl + "/" + remoteFileName);
             request.Method = "GET";
@@ -103,6 +125,11 @@ namespace NAnt.VSNet {
             buffer = null;
         }
 
+        /// <summary>
+        /// Gets the file contents.
+        /// </summary>
+        /// <param name="remoteFileName">Name of the remote file.</param>
+        /// <returns>The file contents.</returns>
         public string GetFileContents(string remoteFileName) {
             WebRequest request = WebRequest.Create(_webProjectBaseUrl + "/" + remoteFileName);
             request.Method = "GET";
@@ -118,6 +145,11 @@ namespace NAnt.VSNet {
 
         #region Public Static Methods
 
+        /// <summary>
+        /// Gets the file contents.
+        /// </summary>
+        /// <param name="remoteFileName">Name of the remote file.</param>
+        /// <returns>The file contents.</returns>
         public static string GetFileContentsStatic(string remoteFileName) {
             WebRequest request = WebRequest.Create(remoteFileName);
             request.Method = "GET";

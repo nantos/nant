@@ -88,6 +88,12 @@ namespace NAnt.Core.Types {
 
         #region Override implementation of Object
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
             ToString (sb);

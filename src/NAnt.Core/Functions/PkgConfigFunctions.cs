@@ -29,6 +29,9 @@ using NAnt.Core.Types;
 using NAnt.Core.Util;
 
 namespace NAnt.Core.Functions {
+    /// <summary>
+    /// pkg-config functions for an Unix/Cygwin environment.
+    /// </summary>
     [FunctionSet("pkg-config", "Unix/Cygwin")]
     public class PkgConfigFunctions : FunctionSetBase {
         #region Public Instance Constructors

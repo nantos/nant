@@ -65,30 +65,71 @@ namespace NAnt.Core {
             _innerHash = new Hashtable(capacity);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
+        /// </summary>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="loadFactor">The load factor.</param>
         public FrameworkInfoDictionary(IDictionary dictionary, float loadFactor) {
             _innerHash = new Hashtable(dictionary, loadFactor);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
+        /// </summary>
+        /// <param name="codeProvider">The code provider.</param>
+        /// <param name="comparer">The comparer.</param>
         public FrameworkInfoDictionary(IHashCodeProvider codeProvider, IComparer comparer) {
             _innerHash = new Hashtable(codeProvider, comparer);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
+        /// </summary>
+        /// <param name="capacity">The capacity.</param>
+        /// <param name="loadFactor">The load factor.</param>
         public FrameworkInfoDictionary(int capacity, int loadFactor) {
             _innerHash = new Hashtable(capacity, loadFactor);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
+        /// </summary>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="codeProvider">The code provider.</param>
+        /// <param name="comparer">The comparer.</param>
         public FrameworkInfoDictionary(IDictionary dictionary, IHashCodeProvider codeProvider, IComparer comparer) {
             _innerHash = new Hashtable (dictionary, codeProvider, comparer);
         }
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
+        /// </summary>
+        /// <param name="capacity">The capacity.</param>
+        /// <param name="codeProvider">The code provider.</param>
+        /// <param name="comparer">The comparer.</param>
         public FrameworkInfoDictionary(int capacity, IHashCodeProvider codeProvider, IComparer comparer) {
             _innerHash = new Hashtable (capacity, codeProvider, comparer);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
+        /// </summary>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="loadFactor">The load factor.</param>
+        /// <param name="codeProvider">The code provider.</param>
+        /// <param name="comparer">The comparer.</param>
         public FrameworkInfoDictionary(IDictionary dictionary, float loadFactor, IHashCodeProvider codeProvider, IComparer comparer) {
             _innerHash = new Hashtable (dictionary, loadFactor, codeProvider, comparer);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameworkInfoDictionary"/> class.
+        /// </summary>
+        /// <param name="capacity">The capacity.</param>
+        /// <param name="loadFactor">The load factor.</param>
+        /// <param name="codeProvider">The code provider.</param>
+        /// <param name="comparer">The comparer.</param>
         public FrameworkInfoDictionary(int capacity, float loadFactor, IHashCodeProvider codeProvider, IComparer comparer) {
             _innerHash = new Hashtable (capacity, loadFactor, codeProvider, comparer);
         }
@@ -106,6 +147,10 @@ namespace NAnt.Core {
 
         #region Implementation of IDictionary
 
+        /// <summary>
+        /// Gets the enumerator.
+        /// </summary>
+        /// <returns></returns>
         public FrameworkInfoDictionaryEnumerator GetEnumerator() {
             return new FrameworkInfoDictionaryEnumerator(this);
         }
@@ -134,6 +179,11 @@ namespace NAnt.Core {
             Remove((string) key);
         }
 
+        /// <summary>
+        /// Determines whether [contains] [the specified key].
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         public bool Contains(string key) {
             return _innerHash.Contains(key);
         }
@@ -174,6 +224,14 @@ namespace NAnt.Core {
             get { return _innerHash.IsReadOnly; }
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="FrameworkInfo"/> with the specified key.
+        /// </summary>
+        /// <value>
+        /// The <see cref="FrameworkInfo"/>.
+        /// </value>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         public FrameworkInfo this[string key] {
             get { return (FrameworkInfo) _innerHash[key]; }
             set { _innerHash[key] = value; }
@@ -213,6 +271,9 @@ namespace NAnt.Core {
             _innerHash.CopyTo(array, index);
         }
 
+        /// <summary>
+        /// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" /> is synchronized (thread safe).
+        /// </summary>
         public bool IsSynchronized {
             get { return _innerHash.IsSynchronized; }
         }
@@ -231,6 +292,11 @@ namespace NAnt.Core {
             get { return _innerHash.SyncRoot; }
         }
 
+        /// <summary>
+        /// Copies to.
+        /// </summary>
+        /// <param name="array">The array.</param>
+        /// <param name="index">The index.</param>
         public void CopyTo(FrameworkInfo[] array, int index) {
             _innerHash.CopyTo(array, index);
         }
@@ -254,17 +320,32 @@ namespace NAnt.Core {
         }
 
         #endregion Implementation of ICloneable
-        
+
         #region HashTable Methods
 
+        /// <summary>
+        /// Determines whether the specified key contains key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         public bool ContainsKey (string key) {
             return _innerHash.ContainsKey(key);
         }
 
+        /// <summary>
+        /// Determines whether the specified value contains value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public bool ContainsValue(FrameworkInfo value) {
             return _innerHash.ContainsValue(value);
         }
 
+        /// <summary>
+        /// Synchronizeds the specified non synchronize.
+        /// </summary>
+        /// <param name="nonSync">The non synchronize.</param>
+        /// <returns></returns>
         public static FrameworkInfoDictionary Synchronized(FrameworkInfoDictionary nonSync) {
             FrameworkInfoDictionary sync = new FrameworkInfoDictionary();
             sync.InnerHash = Hashtable.Synchronized(nonSync.InnerHash);
@@ -273,7 +354,10 @@ namespace NAnt.Core {
 
         #endregion HashTable Methods
     }
-    
+
+    /// <summary>
+    /// Enumerator for a <see cref="FrameworkInfoDictionary"/> instance.
+    /// </summary>
     public class FrameworkInfoDictionaryEnumerator : IDictionaryEnumerator {
         #region Private Instance Fields
 
@@ -291,6 +375,9 @@ namespace NAnt.Core {
 
         #region Implementation of IDictionaryEnumerator
 
+        /// <summary>
+        /// Gets the key of the current dictionary entry.
+        /// </summary>
         public string Key {
             get { return (string) _innerEnumerator.Key; }
         }
@@ -299,6 +386,9 @@ namespace NAnt.Core {
             get { return Key; }
         }
 
+        /// <summary>
+        /// Gets the value of the current dictionary entry.
+        /// </summary>
         public FrameworkInfo Value {
             get { return (FrameworkInfo) _innerEnumerator.Value; }
         }
@@ -307,6 +397,9 @@ namespace NAnt.Core {
             get { return Value; }
         }
 
+        /// <summary>
+        /// Gets both the key and the value of the current dictionary entry.
+        /// </summary>
         public DictionaryEntry Entry {
             get { return _innerEnumerator.Entry; }
         }
@@ -315,10 +408,19 @@ namespace NAnt.Core {
 
         #region Implementation of IEnumerator
 
+        /// <summary>
+        /// Sets the enumerator to its initial position, which is before the first element in the collection.
+        /// </summary>
         public void Reset() {
             _innerEnumerator.Reset();
         }
 
+        /// <summary>
+        /// Advances the enumerator to the next element of the collection.
+        /// </summary>
+        /// <returns>
+        /// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+        /// </returns>
         public bool MoveNext() {
             return _innerEnumerator.MoveNext();
         }
@@ -327,6 +429,9 @@ namespace NAnt.Core {
             get { return _innerEnumerator.Current; }
         }
 
+        /// <summary>
+        /// Gets the current element in the collection.
+        /// </summary>
         public FrameworkInfo Current {
             get { return (FrameworkInfo)((DictionaryEntry)_innerEnumerator.Current).Value; }
         }

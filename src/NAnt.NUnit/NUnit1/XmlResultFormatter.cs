@@ -44,6 +44,13 @@ namespace NAnt.NUnit1.Types {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets or sets the <see cref="TextWriter" /> the formatter is supposed to 
+        /// write its results to.
+        /// </summary>
+        /// <value>
+        /// The writer.
+        /// </value>
         public TextWriter Writer {
             get { return _writer; }
             set { _writer = value; }
@@ -101,14 +108,28 @@ namespace NAnt.NUnit1.Types {
 
         #region Implemenation of ITestListener
 
+        /// <summary>
+        /// Adds the error.
+        /// </summary>
+        /// <param name="test">The test.</param>
+        /// <param name="t">The error.</param>
         public void AddError(ITest test, Exception t) {
             FormatError(ElementError, test, t);
         }
 
+        /// <summary>
+        /// Adds the failure to the result.
+        /// </summary>
+        /// <param name="test">The test.</param>
+        /// <param name="t">The failure.</param>
         public void AddFailure(ITest test, AssertionFailedError t) {
             FormatError(ElementFailure, test, (Exception)t);
         }
 
+        /// <summary>
+        /// Starts the test.
+        /// </summary>
+        /// <param name="test">The test.</param>
         public void StartTest(ITest test) {
             _testStartTime =  DateTime.Now;
             _currentTest = _document.CreateElement(ElementTestCase);
@@ -120,6 +141,10 @@ namespace NAnt.NUnit1.Types {
             _suiteElement.AppendChild(_currentTest);
         }
 
+        /// <summary>
+        /// Ends the test.
+        /// </summary>
+        /// <param name="test">The test.</param>
         public void EndTest(ITest test) {
             TimeSpan elapsedTime = DateTime.Now - _testStartTime;
             double time = elapsedTime.Milliseconds;

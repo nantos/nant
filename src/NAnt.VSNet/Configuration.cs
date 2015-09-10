@@ -21,10 +21,22 @@ using System;
 using System.Globalization;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Configuration : IComparable {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Configuration"/> class.
+        /// </summary>
         public Configuration() {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Configuration"/> class.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="platform">The platform.</param>
+        /// <exception cref="System.ArgumentNullException">name</exception>
         public Configuration(string name, string platform) {
             if (name == null)
                 throw new ArgumentNullException ("name");
@@ -33,6 +45,13 @@ namespace NAnt.VSNet {
             _platform = platform;
         }
 
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        /// <exception cref="System.ArgumentNullException">value</exception>
         public string Name {
             get { return _name; }
             set {
@@ -42,6 +61,12 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Gets or sets the platform.
+        /// </summary>
+        /// <value>
+        /// The platform.
+        /// </value>
         public string Platform {
             get {
                 if (_platform == null)
@@ -53,6 +78,11 @@ namespace NAnt.VSNet {
 
         #region Implementation of IComparable
 
+        /// <summary>
+        /// Compares to.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
         public int CompareTo(object obj) {
             if (this.Equals(obj))
                 return 0;
@@ -63,6 +93,13 @@ namespace NAnt.VSNet {
 
         #region Override implementation of Object
 
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj) {
             if (obj == null)
                 return false;
@@ -74,11 +111,23 @@ namespace NAnt.VSNet {
                 && (string.Compare (Platform, config.Platform, true, CultureInfo.InvariantCulture) == 0);
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode() {
             return Name.ToLower (CultureInfo.InvariantCulture).GetHashCode ()
                 ^ Platform.ToLower (CultureInfo.InvariantCulture).GetHashCode ();
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString() {
             if (Platform.Length == 0) {
                 return Name;
@@ -88,6 +137,14 @@ namespace NAnt.VSNet {
 
         #endregion Override implementation of Object
 
+        /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="c1">The c1.</param>
+        /// <param name="c2">The c2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator == (Configuration c1, Configuration c2) {
             if ((object) c1 == null) {
                 return ((object) c2 == null);
@@ -95,10 +152,24 @@ namespace NAnt.VSNet {
             return c1.Equals (c2);
         }
 
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="c1">The c1.</param>
+        /// <param name="c2">The c2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator != (Configuration c1, Configuration c2) {
             return !(c1 == c2);
         }
 
+        /// <summary>
+        /// Parses the specified configuration.
+        /// </summary>
+        /// <param name="config">The configuration.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">config</exception>
         public static Configuration Parse (string config) {
             if (config == null) {
                 throw new ArgumentNullException ("config");

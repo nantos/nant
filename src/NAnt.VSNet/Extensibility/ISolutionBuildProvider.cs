@@ -24,8 +24,25 @@ using NAnt.Core.Util;
 using NAnt.VSNet.Tasks;
 
 namespace NAnt.VSNet.Extensibility {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ISolutionBuildProvider : IPlugin {
+        /// <summary>
+        /// Determines whether the specified file contents is supported.
+        /// </summary>
+        /// <param name="fileContents">The file contents.</param>
+        /// <returns></returns>
         int IsSupported(string fileContents);
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        /// <param name="solutionContent">Content of the solution.</param>
+        /// <param name="solutionTask">The solution task.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="refResolver">The reference resolver.</param>
+        /// <returns></returns>
         SolutionBase GetInstance(string solutionContent, SolutionTask solutionTask, TempFileCollection tfc, GacCache gacCache, ReferencesResolver refResolver);
     }
 }

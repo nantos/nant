@@ -29,6 +29,13 @@ namespace NAnt.VSNet {
     public class GenericSolution : SolutionBase {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericSolution"/> class.
+        /// </summary>
+        /// <param name="solutionTask">The solution task.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="refResolver">The reference resolver.</param>
         public GenericSolution(SolutionTask solutionTask, TempFileCollection tfc, GacCache gacCache, ReferencesResolver refResolver) : base(solutionTask, tfc, gacCache, refResolver) {
         }
 

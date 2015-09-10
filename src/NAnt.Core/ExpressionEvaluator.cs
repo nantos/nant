@@ -25,6 +25,9 @@ using NAnt.Core.Attributes;
 using NAnt.Core.Util;
 
 namespace NAnt.Core {
+    /// <summary>
+    /// 
+    /// </summary>
     [FunctionSet("property", "NAnt")]
     public class ExpressionEvaluator : ExpressionEvalBase {
         #region Private Instance Fields
@@ -55,10 +58,21 @@ namespace NAnt.Core {
 
         #region Override implementation of ExpressionEvalBase
 
+        /// <summary>
+        /// Evaluates the property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns></returns>
         protected override object EvaluateProperty(string propertyName) {
             return GetPropertyValue(propertyName);
         }
 
+        /// <summary>
+        /// Evaluates the function.
+        /// </summary>
+        /// <param name="methodInfo">The method information.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
         protected override object EvaluateFunction(MethodInfo methodInfo, object[] args) {
             try {
                 if (methodInfo.IsStatic) {

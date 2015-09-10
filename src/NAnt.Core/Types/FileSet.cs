@@ -23,6 +23,7 @@ using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Xml;
 using NAnt.Core.Attributes;
 using NAnt.Core.Util;
 
@@ -345,6 +346,12 @@ namespace NAnt.Core.Types {
             get { return _asis; }
         }
 
+        /// <summary>
+        /// Gets the path files.
+        /// </summary>
+        /// <value>
+        /// The path files.
+        /// </value>
         public PathScanner PathFiles {
             get { return _pathFiles; }
         }
@@ -650,6 +657,14 @@ namespace NAnt.Core.Types {
 
         #region Override implementation of Element
 
+        /// <summary>
+        /// Derived classes should override to this method to provide extra
+        /// initialization and validation not covered by the base class.
+        /// </summary>
+        /// <remarks>
+        /// Access to the <see cref="XmlNode" /> that was used to initialize
+        /// this <see cref="Element" /> is available through <see cref="XmlNode" />.
+        /// </remarks>
         protected override void Initialize() {
             base.Initialize();
             if (DefaultExcludes) {
@@ -688,6 +703,10 @@ namespace NAnt.Core.Types {
 
         #region Override implementation of DataTypeBase
 
+        /// <summary>
+        /// Should be overridden by derived classes. clones the referenced types
+        /// data into the current instance.
+        /// </summary>
         public override void Reset() {
             // ensure that scanning will happen again for each use
             _hasScanned = false;
@@ -697,6 +716,12 @@ namespace NAnt.Core.Types {
 
         #region Override implementation of Object
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString() {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             if (!_hasScanned){
@@ -738,6 +763,11 @@ namespace NAnt.Core.Types {
             Excludes.AddRange(patternSet.GetExcludePatterns());
         }
 
+        /// <summary>
+        /// Scans this instance.
+        /// </summary>
+        /// <exception cref="BuildException">Error creating FileSet.</exception>
+        /// <exception cref="NAnt.Core.ValidationException"></exception>
         public virtual void Scan() {
             try {
                 _scanner.BaseDirectory = BaseDirectory;
@@ -866,12 +896,15 @@ namespace NAnt.Core.Types {
             }
             return null;
         }
-        
+
         #endregion Public Static Methods
 
         // These classes provide a way of getting the Element task to initialize
         // the values from the build file.
 
+        /// <summary>
+        /// 
+        /// </summary>
         public class Exclude : Element, IConditional{
             #region Private Instance Fields
 
@@ -919,6 +952,9 @@ namespace NAnt.Core.Types {
             #endregion Public Instance Properties
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public class Include : Exclude {
             #region Private Instance Fields
 
@@ -992,6 +1028,9 @@ namespace NAnt.Core.Types {
             #endregion Override implementation of Exclude
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public class ExcludesFile : Element, IConditional {
             #region Private Instance Fields
 
@@ -1073,7 +1112,10 @@ namespace NAnt.Core.Types {
 
             #endregion Public Instance Properties
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
         public class IncludesFile : ExcludesFile {
             #region Private Instance Fields
 

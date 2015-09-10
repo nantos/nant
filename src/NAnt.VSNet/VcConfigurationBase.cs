@@ -39,12 +39,24 @@ namespace NAnt.VSNet {
     public abstract class VcConfigurationBase : ConfigurationBase {
         #region Delegates
 
+        /// <summary>
+        /// Delegate for the expansion handler.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public delegate string ExpansionHandler(string value);
 
         #endregion Delegates
 
         #region Protected Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VcConfigurationBase"/> class.
+        /// </summary>
+        /// <param name="elem">The elem.</param>
+        /// <param name="parentProject">The parent project.</param>
+        /// <param name="outputDir">The output dir.</param>
+        /// <exception cref="System.ArgumentNullException">elem</exception>
         protected VcConfigurationBase(XmlElement elem, ProjectBase parentProject, DirectoryInfo outputDir) : base(parentProject) {
             if (elem == null) {
                 throw new ArgumentNullException("elem");
@@ -71,6 +83,12 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VcConfigurationBase"/> class.
+        /// </summary>
+        /// <param name="configName">Name of the configuration.</param>
+        /// <param name="parentProject">The parent project.</param>
+        /// <param name="outputDir">The output dir.</param>
         protected VcConfigurationBase(string configName, ProjectBase parentProject, DirectoryInfo outputDir)  : base(parentProject) {
             _name = configName;
 
@@ -106,6 +124,12 @@ namespace NAnt.VSNet {
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating the usage precompiled header.
+        /// </summary>
+        /// <value>
+        /// The value indicating the usage precompiled header.
+        /// </value>
         public UsePrecompiledHeader UsePrecompiledHeader {
             get {
                 string usePCHString = GetToolSetting("VCCLCompilerTool", 
@@ -313,16 +337,32 @@ namespace NAnt.VSNet {
         /// </remarks>
         public abstract string GetToolSetting(string toolName, string settingName, string defaultValue);
 
+        /// <summary>
+        /// Gets the tool arguments.
+        /// </summary>
+        /// <param name="toolName">Name of the tool.</param>
+        /// <param name="argMap">The argument map.</param>
+        /// <returns>A hanstable containing the tool arguments.</returns>
         public Hashtable GetToolArguments(string toolName, VcArgumentMap argMap) {
             return GetToolArguments(toolName, argMap, VcArgumentMap.ArgGroup.Unassigned);
         }
 
+        /// <summary>
+        /// Gets the tool arguments.
+        /// </summary>
+        /// <param name="toolName">Name of the tool.</param>
+        /// <param name="argMap">The argument map.</param>
+        /// <param name="ignoreGroup">The ignore group.</param>
+        /// <returns>A hanstable containing the tool arguments.</returns>
         public abstract Hashtable GetToolArguments(string toolName, VcArgumentMap argMap, VcArgumentMap.ArgGroup ignoreGroup);
 
         #endregion Public Instance Methods
 
         #region Protected Instance Fields
 
+        /// <summary>
+        /// The tools.
+        /// </summary>
         protected readonly Hashtable Tools = CollectionsUtil.CreateCaseInsensitiveHashtable();
 
         #endregion Protected Instance Fields

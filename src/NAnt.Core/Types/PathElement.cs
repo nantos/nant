@@ -21,6 +21,7 @@ using System;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
+using System.Xml;
 using NAnt.Core.Attributes;
 
 namespace NAnt.Core.Types {
@@ -124,6 +125,16 @@ namespace NAnt.Core.Types {
 
         #region Override implementation of Element
 
+        /// <summary>
+        /// Derived classes should override to this method to provide extra
+        /// initialization and validation not covered by the base class.
+        /// </summary>
+        /// <exception cref="BuildException">
+        /// </exception>
+        /// <remarks>
+        /// Access to the <see cref="XmlNode" /> that was used to initialize
+        /// this <see cref="Element" /> is available through <see cref="XmlNode" />.
+        /// </remarks>
         protected override void Initialize() {
             if (File == null && Directory == null && Path == null) {
                 throw new BuildException(string.Format(CultureInfo.InstalledUICulture,

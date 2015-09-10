@@ -26,6 +26,9 @@ using NAnt.Core.Util;
 using NAnt.VSNet.Tasks;
 
 namespace NAnt.VSNet.Extensibility {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IProjectBuildProvider : IPlugin {
         /// <summary>
         /// Returns a number representing how much this file fits this project type.
@@ -37,7 +40,24 @@ namespace NAnt.VSNet.Extensibility {
         /// This enables the override in other providers. Do not return big numbers, mainly when compring only on filename.
         /// </remarks>
         int IsSupported(string projectExt, XmlElement xmlDefinition);
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        /// <param name="solution">The solution.</param>
+        /// <param name="projectPath">The project path.</param>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="solutionTask">The solution task.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="refResolver">The reference resolver.</param>
+        /// <param name="outputDir">The output dir.</param>
+        /// <returns></returns>
         ProjectBase GetInstance(SolutionBase solution, string projectPath, XmlElement xmlDefinition, SolutionTask solutionTask, TempFileCollection tfc, GacCache gacCache, ReferencesResolver refResolver, DirectoryInfo outputDir);
+        /// <summary>
+        /// Loads the unique identifier.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <returns></returns>
         string LoadGuid(XmlElement xmlDefinition);
     }
 }

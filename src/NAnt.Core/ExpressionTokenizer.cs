@@ -30,13 +30,26 @@ namespace NAnt.Core {
     /// </summary>
     public class ExpressionTokenizer {
 
+        /// <summary>
+        /// 
+        /// </summary>
         public struct Position {
             private int _charIndex;
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Position"/> struct.
+            /// </summary>
+            /// <param name="charIndex">Index of the character.</param>
             public Position(int charIndex) {
                 _charIndex = charIndex;
             }
 
+            /// <summary>
+            /// Gets the index of the character.
+            /// </summary>
+            /// <value>
+            /// The index of the character.
+            /// </value>
             public int CharIndex {
                 get { return _charIndex; }
             }
@@ -46,37 +59,121 @@ namespace NAnt.Core {
         /// Available tokens
         /// </summary>
         public enum TokenType {
+            /// <summary>
+            /// The bof
+            /// </summary>
             BOF,
+            /// <summary>
+            /// The EOF
+            /// </summary>
             EOF,
+            /// <summary>
+            /// The number
+            /// </summary>
             Number,
+            /// <summary>
+            /// The string
+            /// </summary>
             String,
+            /// <summary>
+            /// The keyword
+            /// </summary>
             Keyword,
+            /// <summary>
+            /// The eq
+            /// </summary>
             EQ,
+            /// <summary>
+            /// The ne
+            /// </summary>
             NE,
+            /// <summary>
+            /// The lt
+            /// </summary>
             LT,
+            /// <summary>
+            /// The gt
+            /// </summary>
             GT,
+            /// <summary>
+            /// The le
+            /// </summary>
             LE,
+            /// <summary>
+            /// The ge
+            /// </summary>
             GE,
+            /// <summary>
+            /// The plus
+            /// </summary>
             Plus,
+            /// <summary>
+            /// The minus
+            /// </summary>
             Minus,
+            /// <summary>
+            /// The mul
+            /// </summary>
             Mul,
+            /// <summary>
+            /// The div
+            /// </summary>
             Div,
+            /// <summary>
+            /// The mod
+            /// </summary>
             Mod,
+            /// <summary>
+            /// The left paren
+            /// </summary>
             LeftParen,
+            /// <summary>
+            /// The right paren
+            /// </summary>
             RightParen,
+            /// <summary>
+            /// The left curly brace
+            /// </summary>
             LeftCurlyBrace,
+            /// <summary>
+            /// The right curly brace
+            /// </summary>
             RightCurlyBrace,
+            /// <summary>
+            /// The not
+            /// </summary>
             Not,
+            /// <summary>
+            /// The punctuation
+            /// </summary>
             Punctuation,
+            /// <summary>
+            /// The whitespace
+            /// </summary>
             Whitespace,
+            /// <summary>
+            /// The dollar
+            /// </summary>
             Dollar,
+            /// <summary>
+            /// The comma
+            /// </summary>
             Comma,
+            /// <summary>
+            /// The dot
+            /// </summary>
             Dot,
+            /// <summary>
+            /// The double colon
+            /// </summary>
             DoubleColon,
         }
 
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionTokenizer"/> class.
+        /// </summary>
         public ExpressionTokenizer() {
         }
 
@@ -96,24 +193,54 @@ namespace NAnt.Core {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets or sets a value indicating whether [ignore whitespace].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [ignore whitespace]; otherwise, <c>false</c>.
+        /// </value>
         public bool IgnoreWhitespace {
             get { return _ignoreWhiteSpace; }
             set { _ignoreWhiteSpace = value; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether [single character mode].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [single character mode]; otherwise, <c>false</c>.
+        /// </value>
         public bool SingleCharacterMode {
             get { return _singleCharacterMode; }
             set { _singleCharacterMode = value; }
         }
 
+        /// <summary>
+        /// Gets the current token.
+        /// </summary>
+        /// <value>
+        /// The current token.
+        /// </value>
         public TokenType CurrentToken {
             get { return _tokenType; }
         }
 
+        /// <summary>
+        /// Gets the token text.
+        /// </summary>
+        /// <value>
+        /// The token text.
+        /// </value>
         public string TokenText {
             get { return _tokenText; }
         }
 
+        /// <summary>
+        /// Gets the current position.
+        /// </summary>
+        /// <value>
+        /// The current position.
+        /// </value>
         public Position CurrentPosition {
             get { return _tokenStartPosition; }
         }
@@ -122,6 +249,10 @@ namespace NAnt.Core {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Initializes the tokenizer.
+        /// </summary>
+        /// <param name="s">The s.</param>
         public void InitTokenizer(string s) {
             _text = s;
             _position = 0;
@@ -130,6 +261,13 @@ namespace NAnt.Core {
             GetNextToken();
         }
 
+        /// <summary>
+        /// Gets the next token.
+        /// </summary>
+        /// <exception cref="ExpressionParseException">
+        /// -1;-1
+        /// or
+        /// </exception>
         public void GetNextToken() {
             if (_tokenType == TokenType.EOF)
                 throw new ExpressionParseException(ResourceUtils.GetString("String_CannotReadPastStream"), -1, -1);
@@ -278,6 +416,11 @@ namespace NAnt.Core {
             }
         }
 
+        /// <summary>
+        /// Determines whether the specified k is keyword.
+        /// </summary>
+        /// <param name="k">The k.</param>
+        /// <returns></returns>
         public bool IsKeyword(string k) {
             return (_tokenType == TokenType.Keyword) && (_tokenText == k);
         }

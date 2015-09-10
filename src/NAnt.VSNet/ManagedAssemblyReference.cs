@@ -28,7 +28,17 @@ using NAnt.Core;
 using NAnt.Core.Util;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Class for handling managed assembly rerferences.
+    /// </summary>
     public class ManagedAssemblyReference : AssemblyReferenceBase {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ManagedAssemblyReference"/> class.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="referencesResolver">The references resolver.</param>
+        /// <param name="parent">The parent.</param>
+        /// <param name="gacCache">The gac cache.</param>
         public ManagedAssemblyReference(XmlElement xmlDefinition, ReferencesResolver referencesResolver, ProjectBase parent, GacCache gacCache) : base(xmlDefinition, referencesResolver, parent, gacCache) {
             XmlAttribute privateAttribute = xmlDefinition.Attributes["Private"];
             if (privateAttribute != null) {
@@ -47,10 +57,22 @@ namespace NAnt.VSNet {
 
         #region Override implementation of AssemblyReferenceBase
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is private.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is private; otherwise, <c>false</c>.
+        /// </value>
         protected override bool IsPrivate {
             get { return _isPrivate; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is private specified.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is private specified; otherwise, <c>false</c>.
+        /// </value>
         protected override bool IsPrivateSpecified {
             get { return _isPrivateSpecified; }
         }
@@ -308,6 +330,12 @@ namespace NAnt.VSNet {
             return componentAssemblyFolder;
         }
 
+        /// <summary>
+        /// Resolves from assembly folders.
+        /// </summary>
+        /// <param name="referenceElement">The reference element.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns></returns>
         protected override string ResolveFromAssemblyFolders(XmlElement referenceElement, string fileName) {
             string resolvedAssemblyFile = null;
 

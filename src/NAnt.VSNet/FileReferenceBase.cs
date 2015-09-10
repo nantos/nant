@@ -29,9 +29,24 @@ using NAnt.Core;
 using NAnt.Core.Util;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class FileReferenceBase : ReferenceBase {
         #region Protected Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileReferenceBase"/> class.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="referencesResolver">The references resolver.</param>
+        /// <param name="parent">The parent.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// xmlDefinition
+        /// or
+        /// gacCache
+        /// </exception>
         protected FileReferenceBase(XmlElement xmlDefinition, ReferencesResolver referencesResolver, ProjectBase parent, GacCache gacCache) : base(referencesResolver, parent) {
             if (xmlDefinition == null) {
                 throw new ArgumentNullException("xmlDefinition");
@@ -48,10 +63,22 @@ namespace NAnt.VSNet {
 
         #region Protected Instance Properties
 
+        /// <summary>
+        /// Gets the XML definition.
+        /// </summary>
+        /// <value>
+        /// The XML definition.
+        /// </value>
         protected XmlElement XmlDefinition {
             get { return _xmlDefinition; }
         }
 
+        /// <summary>
+        /// Gets the gac cache.
+        /// </summary>
+        /// <value>
+        /// The gac cache.
+        /// </value>
         protected GacCache GacCache {
             get { return _gacCache; }
         }

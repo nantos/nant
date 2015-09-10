@@ -28,6 +28,9 @@ using NAnt.Core.Extensibility;
 using NAnt.Core.Util;
 
 namespace NAnt.Core {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class ExpressionEvalBase {
 
         enum EvalMode {
@@ -39,6 +42,11 @@ namespace NAnt.Core {
         private ExpressionTokenizer _tokenizer;
         private readonly Project _project;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionEvalBase"/> class.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <exception cref="System.ArgumentNullException">project</exception>
         public ExpressionEvalBase(Project project) {
             if (project == null)
                 throw new ArgumentNullException("project");
@@ -48,18 +56,34 @@ namespace NAnt.Core {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets the project.
+        /// </summary>
+        /// <value>
+        /// The project.
+        /// </value>
         public Project Project {
             get { return _project; }
         }
 
         #endregion Public Instance Properties
 
+        /// <summary>
+        /// Evaluates the specified tokenizer.
+        /// </summary>
+        /// <param name="tokenizer">The tokenizer.</param>
+        /// <returns></returns>
         public object Evaluate(ExpressionTokenizer tokenizer) {
             _evalMode = EvalMode.Evaluate;
             _tokenizer = tokenizer;
             return ParseExpression();
         }
 
+        /// <summary>
+        /// Evaluates the specified s.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <returns></returns>
         public object Evaluate(string s) {
             _tokenizer = new ExpressionTokenizer();
             _evalMode = EvalMode.Evaluate;
@@ -72,6 +96,10 @@ namespace NAnt.Core {
             return val;
         }
 
+        /// <summary>
+        /// Checks the syntax.
+        /// </summary>
+        /// <param name="s">The s.</param>
         public void CheckSyntax(string s) {
             _tokenizer = new ExpressionTokenizer();
             _evalMode = EvalMode.ParseOnly;
@@ -1003,18 +1031,48 @@ namespace NAnt.Core {
             return UnexpectedToken();
         }
 
+        /// <summary>
+        /// Builds the parse error.
+        /// </summary>
+        /// <param name="desc">The desc.</param>
+        /// <param name="p0">The p0.</param>
+        /// <returns></returns>
         protected ExpressionParseException BuildParseError(string desc, ExpressionTokenizer.Position p0) {
             return new ExpressionParseException(desc, p0.CharIndex);
         }
-        
+
+        /// <summary>
+        /// Builds the parse error.
+        /// </summary>
+        /// <param name="desc">The desc.</param>
+        /// <param name="p0">The p0.</param>
+        /// <param name="p1">The p1.</param>
+        /// <returns></returns>
         protected ExpressionParseException BuildParseError(string desc, ExpressionTokenizer.Position p0, ExpressionTokenizer.Position p1) {
             return new ExpressionParseException(desc, p0.CharIndex, p1.CharIndex);
         }
-        
+
+        /// <summary>
+        /// Builds the parse error.
+        /// </summary>
+        /// <param name="desc">The desc.</param>
+        /// <param name="p0">The p0.</param>
+        /// <param name="p1">The p1.</param>
+        /// <param name="ex">The ex.</param>
+        /// <returns></returns>
         protected ExpressionParseException BuildParseError(string desc, ExpressionTokenizer.Position p0, ExpressionTokenizer.Position p1, Exception ex) {
             return new ExpressionParseException(desc, p0.CharIndex, p1.CharIndex, ex);
         }
 
+        /// <summary>
+        /// Safes the convert.
+        /// </summary>
+        /// <param name="returnType">Type of the return.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="p0">The p0.</param>
+        /// <param name="p1">The p1.</param>
+        /// <returns></returns>
         protected object SafeConvert(Type returnType, object source, string description, ExpressionTokenizer.Position p0, ExpressionTokenizer.Position p1) {
             try {
                 //
@@ -1121,6 +1179,11 @@ namespace NAnt.Core {
             }
         }
 
+        /// <summary>
+        /// Gets the name of the simple type.
+        /// </summary>
+        /// <param name="t">The t.</param>
+        /// <returns></returns>
         protected string GetSimpleTypeName(Type t) {
             if (t == typeof(int)) {
                 return "int";
@@ -1145,9 +1208,24 @@ namespace NAnt.Core {
 
         #region Overridables
 
+        /// <summary>
+        /// Evaluates the function.
+        /// </summary>
+        /// <param name="method">The method.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
         protected abstract object EvaluateFunction(MethodInfo method, object[] args);
+        /// <summary>
+        /// Evaluates the property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns></returns>
         protected abstract object EvaluateProperty(string propertyName);
 
+        /// <summary>
+        /// Unexpecteds the token.
+        /// </summary>
+        /// <returns></returns>
         protected virtual object UnexpectedToken() {
             throw BuildParseError(string.Format(CultureInfo.InvariantCulture, 
                 "Unexpected token '{0}'.", _tokenizer.CurrentToken), _tokenizer.CurrentPosition);

@@ -112,10 +112,22 @@ namespace NAnt.VSNet {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
         public ConfigurationType Type {
             get { return _type; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether whole program optimization is active or not.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if whole program optimization is acitve; otherwise, <c>false</c>.
+        /// </value>
         public bool WholeProgramOptimization {
             get { return _wholeProgramOptimization; }
         }
@@ -371,6 +383,21 @@ namespace NAnt.VSNet {
             return GetToolSetting(toolName, settingName, (string) null, expander);
         }
 
+        /// <summary>
+        /// Gets the value of a given setting for a specified tool.
+        /// </summary>
+        /// <param name="toolName">The name of the tool.</param>
+        /// <param name="settingName">The name of the setting.</param>
+        /// <param name="defaultValue">The value to return if setting is not defined.</param>
+        /// <returns>
+        /// The value of a setting for the specified tool, or
+        /// <paramref name="defaultValue" /> if the setting is not defined for
+        /// the specified tool.
+        /// </returns>
+        /// <remarks>
+        /// An empty setting value, which is used as a means to override the
+        /// project default, will be returned as a empty <see cref="string" />.
+        /// </remarks>
         public override string GetToolSetting(string toolName, string settingName, string defaultValue) {
             return GetToolSetting(toolName, settingName, defaultValue, 
                 new ExpansionHandler(ExpandMacros));
@@ -395,6 +422,13 @@ namespace NAnt.VSNet {
             return setting;
         }
 
+        /// <summary>
+        /// Gets the tool arguments.
+        /// </summary>
+        /// <param name="toolName">Name of the tool.</param>
+        /// <param name="argMap">The argument map.</param>
+        /// <param name="ignoreGroup">The ignore group.</param>
+        /// <returns>A hashtable contianing the tool arguments.</returns>
         public override Hashtable GetToolArguments(string toolName, VcArgumentMap argMap, VcArgumentMap.ArgGroup ignoreGroup) {
             return GetToolArguments(toolName, argMap, ignoreGroup, new ExpansionHandler(ExpandMacros));
         }

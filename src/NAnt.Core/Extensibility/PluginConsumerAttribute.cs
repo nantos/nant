@@ -20,6 +20,9 @@
 using System;
 
 namespace NAnt.Core.Extensibility {
+    /// <summary>
+    /// Attribute defining the which interfaces can be consumed.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited=false, AllowMultiple=true)]
     public sealed class PluginConsumerAttribute : Attribute {
         private Type _type;
@@ -37,6 +40,12 @@ namespace NAnt.Core.Extensibility {
             _type = type;
         }
 
+        /// <summary>
+        /// Gets the type of the plugin.
+        /// </summary>
+        /// <value>
+        /// The type of the plugin.
+        /// </value>
         public Type PluginType {
             get { return _type; }
         }

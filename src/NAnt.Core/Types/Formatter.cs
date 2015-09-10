@@ -20,6 +20,9 @@
 using NAnt.Core.Attributes;
 
 namespace NAnt.Core.Types {
+    /// <summary>
+    /// 
+    /// </summary>
     [ElementName("formatter")]
     public class Formatter : Element, IConditional {
         #region Private Instance Fields

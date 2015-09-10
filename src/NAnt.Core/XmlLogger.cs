@@ -351,6 +351,11 @@ namespace NAnt.Core {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Strips the passed string.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>The stripped message.</returns>
         public string StripFormatting(string message) {
             // will hold the message stripped from whitespace and null characters
             string strippedMessage;
@@ -373,6 +378,11 @@ namespace NAnt.Core {
             return strippedMessage;
         }
 
+        /// <summary>
+        /// Determines whether the specified message contains only white space characters.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns><c>true</c> if  the message contains only white space characters; else <c>false</c></returns>
         public bool IsJustWhiteSpace(string message) {
             Regex r = new Regex(@"^[\s\0]*$");
             return r.Match(message).Success;

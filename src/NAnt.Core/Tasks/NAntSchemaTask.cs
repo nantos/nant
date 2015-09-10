@@ -194,6 +194,11 @@ namespace NAnt.Core.Tasks {
 
         #region Protected Static Methods
 
+        /// <summary>
+        /// Generates the type of the identifier from.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The ID generated from the type.</returns>
         protected static string GenerateIDFromType(Type type) {
             return type.ToString().Replace("+", "-").Replace("[", "_").Replace("]", "_");
         }
@@ -236,8 +241,13 @@ namespace NAnt.Core.Tasks {
             }
             
             return newSeq;
-        }    
+        }
 
+        /// <summary>
+        /// Convernts the text to a node array.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns>The created node array.</returns>
         protected static XmlNode[] TextToNodeArray(string text) {
             XmlDocument doc = new XmlDocument();
 

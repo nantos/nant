@@ -22,9 +22,16 @@ using System;
 using NAnt.NUnit1.Types;
 
 namespace NAnt.NUnit1.Tasks {
+    /// <summary>
+    /// Class for running NUint test remotely.
+    /// </summary>
     public class RemoteNUnitTestRunner : MarshalByRefObject {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RemoteNUnitTestRunner"/> class.
+        /// </summary>
+        /// <param name="testData">The test data.</param>
         public RemoteNUnitTestRunner(NUnitTestData testData) {
             _runner = new NUnitTestRunner(testData);
         }
@@ -33,10 +40,22 @@ namespace NAnt.NUnit1.Tasks {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets the result code.
+        /// </summary>
+        /// <value>
+        /// The result code.
+        /// </value>
         public RunnerResult ResultCode {
             get { return _runner.ResultCode; }
         }
 
+        /// <summary>
+        /// Gets the formatters.
+        /// </summary>
+        /// <value>
+        /// The formatters.
+        /// </value>
         public IResultFormatterCollection Formatters {
             get { return _runner.Formatters; }
         }
@@ -45,6 +64,11 @@ namespace NAnt.NUnit1.Tasks {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Runs the specified log prefix.
+        /// </summary>
+        /// <param name="logPrefix">The log prefix.</param>
+        /// <param name="verbose">if set to <c>true</c> [verbose].</param>
         public void Run(string logPrefix, bool verbose) {
             _runner.Run(logPrefix, verbose);
         }

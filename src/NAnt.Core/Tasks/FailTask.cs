@@ -139,6 +139,9 @@ namespace NAnt.Core.Tasks {
             throw new BuildException(message, Location);
         }
 
+        /// <summary>
+        /// Initializes the task.
+        /// </summary>
         protected override void Initialize() {
             Contents = Project.ExpandProperties(XmlNode.InnerText, Location);
         }

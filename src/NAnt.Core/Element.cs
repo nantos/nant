@@ -379,6 +379,13 @@ namespace NAnt.Core {
 
         #region Protected Instance Instance Methods
 
+        /// <summary>
+        /// Gets the attribute configuration node.
+        /// </summary>
+        /// <param name="configSection">The configuration section.</param>
+        /// <param name="framework">The framework.</param>
+        /// <param name="attributeName">Name of the attribute.</param>
+        /// <returns></returns>
         protected XmlNode GetAttributeConfigurationNode(XmlNode configSection, FrameworkInfo framework, string attributeName) {
             XmlNode attributeNode = null;
             string xpath = "";
@@ -640,38 +647,92 @@ namespace NAnt.Core {
 
             #region Public Instance Properties
 
+            /// <summary>
+            /// Gets the element.
+            /// </summary>
+            /// <value>
+            /// The element.
+            /// </value>
             public Element Element {
                 get { return _element; }
             }
 
+            /// <summary>
+            /// Gets the location.
+            /// </summary>
+            /// <value>
+            /// The location.
+            /// </value>
             public Location Location {
                 get { return Element.Location; }
             }
 
+            /// <summary>
+            /// Gets the name.
+            /// </summary>
+            /// <value>
+            /// The name.
+            /// </value>
             public string Name {
                 get { return Element.Name; }
             }
 
+            /// <summary>
+            /// Gets the project.
+            /// </summary>
+            /// <value>
+            /// The project.
+            /// </value>
             public Project Project {
                 get { return Element.Project; }
             }
 
+            /// <summary>
+            /// Gets the element XML.
+            /// </summary>
+            /// <value>
+            /// The element XML.
+            /// </value>
             public XmlNode ElementXml {
                 get { return _elementXml; }
             }
 
+            /// <summary>
+            /// Gets the properties.
+            /// </summary>
+            /// <value>
+            /// The properties.
+            /// </value>
             public PropertyDictionary Properties {
                 get { return _properties; }
             }
 
+            /// <summary>
+            /// Gets the target framework.
+            /// </summary>
+            /// <value>
+            /// The target framework.
+            /// </value>
             public FrameworkInfo TargetFramework {
                 get { return _targetFramework; }
             }
 
+            /// <summary>
+            /// Gets the unprocessed attributes.
+            /// </summary>
+            /// <value>
+            /// The unprocessed attributes.
+            /// </value>
             public StringCollection UnprocessedAttributes {
                 get { return _unprocessedAttributes; }
             }
 
+            /// <summary>
+            /// Gets the unprocessed child nodes.
+            /// </summary>
+            /// <value>
+            /// The unprocessed child nodes.
+            /// </value>
             public StringCollection UnprocessedChildNodes {
                 get { return _unprocessedChildNodes; }
             }
@@ -1229,6 +1290,15 @@ namespace NAnt.Core {
                 return true;
             }
 
+            /// <summary>
+            /// Initializes the child element.
+            /// </summary>
+            /// <param name="propertyInfo">The property information.</param>
+            /// <param name="getter">The getter.</param>
+            /// <param name="setter">The setter.</param>
+            /// <returns></returns>
+            /// <exception cref="BuildException">
+            /// </exception>
             protected virtual bool InitializeChildElement(PropertyInfo propertyInfo, MethodInfo getter, MethodInfo setter) {
                 // now do nested BuildElements
                 BuildElementAttribute buildElementAttribute = (BuildElementAttribute) 
@@ -1400,6 +1470,13 @@ namespace NAnt.Core {
                 }
             }
 
+            /// <summary>
+            /// Initializes the build element.
+            /// </summary>
+            /// <param name="childNode">The child node.</param>
+            /// <param name="elementType">Type of the element.</param>
+            /// <returns></returns>
+            /// <exception cref="BuildException"></exception>
             protected virtual Element InitializeBuildElement(XmlNode childNode, Type elementType) {
                 if (!typeof(Element).IsAssignableFrom(elementType)) {
                     throw new BuildException(string.Format(CultureInfo.InvariantCulture, 

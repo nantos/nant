@@ -462,6 +462,11 @@ namespace NAnt.Core.Tasks {
 
         #region Protected Instance Methods
 
+        /// <summary>
+        /// Does the work.
+        /// </summary>
+        /// <param name="propVals">The property vals.</param>
+        /// <exception cref="BuildException">Too many items on line</exception>
         protected virtual void DoWork(params string[] propVals) {
             for (int nIndex = 0; nIndex < propVals.Length; nIndex++) {
                 string propValue = propVals[nIndex];

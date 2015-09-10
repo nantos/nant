@@ -27,6 +27,9 @@ using System.Runtime.Remoting.Lifetime;
 using NAnt.Core.Util;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Class for resolving references.
+    /// </summary>
     public class ReferencesResolver : MarshalByRefObject {
         #region Override implementation of MarshalByRefObject
 
@@ -52,6 +55,13 @@ namespace NAnt.VSNet {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Appends the referenced modules located in given directory.
+        /// </summary>
+        /// <param name="moduleDirectory">The module directory.</param>
+        /// <param name="moduleName">Name of the module.</param>
+        /// <param name="allReferences">All references.</param>
+        /// <param name="unresolvedReferences">The unresolved references.</param>
         public void AppendReferencedModulesLocatedInGivenDirectory(string moduleDirectory, string moduleName, ref Hashtable allReferences, ref Hashtable unresolvedReferences) {
             Assembly module = null;
 

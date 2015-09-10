@@ -32,9 +32,23 @@ using NAnt.DotNet.Types;
 using NAnt.VSNet.Tasks;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Implementation of a VB project.
+    /// </summary>
     public class VBProject : ManagedProjectBase {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VBProject"/> class.
+        /// </summary>
+        /// <param name="solution">The solution.</param>
+        /// <param name="projectPath">The project path.</param>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="solutionTask">The solution task.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="refResolver">The reference resolver.</param>
+        /// <param name="outputDir">The output dir.</param>
         public VBProject(SolutionBase solution, string projectPath, XmlElement xmlDefinition, SolutionTask solutionTask, TempFileCollection tfc, GacCache gacCache, ReferencesResolver refResolver, DirectoryInfo outputDir) : base(solution, projectPath, xmlDefinition, solutionTask, tfc, gacCache, refResolver, outputDir) {
             _imports = new NamespaceImportCollection();
 
@@ -54,6 +68,10 @@ namespace NAnt.VSNet {
 
         #region Override implementation of ManagedProjectBase
 
+        /// <summary>
+        /// Writes the project options to the specified <see cref="StreamWriter"/>.
+        /// </summary>
+        /// <param name="sw">The <see cref="StreamWriter"/> instance used for writing the data.</param>
         protected override void WriteProjectOptions(StreamWriter sw) {
             // write namespace imports
             if (_imports.Count > 0) {

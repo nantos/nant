@@ -249,6 +249,9 @@ namespace NAnt.Core.Tasks {
 
         #endregion Override implementation of Task
 
+        /// <summary>
+        /// Contains all build elements which will be executed in the catch block.
+        /// </summary>
         public class CatchElement : ElementContainer {
             #region Private Instance Fields
 
@@ -283,6 +286,10 @@ namespace NAnt.Core.Tasks {
 
             #region Public Instance Methods
 
+            /// <summary>
+            /// Extraacts the required information from the specified <see cref="BuildException"/> instance.
+            /// </summary>
+            /// <param name="be">The <see cref="BuildException"/> instance..</param>
             public void Catch(BuildException be) {
                 bool propertyExists = false;
                 string originalPropertyValue = null;

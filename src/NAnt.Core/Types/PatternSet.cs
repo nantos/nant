@@ -276,6 +276,12 @@ namespace NAnt.Core.Types {
             }
         }
 
+        /// <summary>
+        /// Gets the include patterns.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="BuildException">Includesfile ' + absoluteFile
+        ///                         + ' not found.</exception>
         public string[] GetIncludePatterns () {
             ArrayList includes = new ArrayList (Include.Count);
             foreach (Pattern include in Include) {
@@ -298,6 +304,12 @@ namespace NAnt.Core.Types {
             return (string[]) includes.ToArray(typeof(string));
         }
 
+        /// <summary>
+        /// Gets the exclude patterns.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="BuildException">Excludesfile ' + absoluteFile
+        ///                         + ' not found.</exception>
         public string[] GetExcludePatterns () {
             ArrayList excludes = new ArrayList (Exclude.Count);
             foreach (Pattern exclude in Exclude) {

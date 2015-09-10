@@ -18,6 +18,7 @@
 // Gerry Shaw (gerry_shaw@yahoo.com)
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using NAnt.Core.Attributes;
@@ -351,6 +352,11 @@ namespace NAnt.Core.Tasks {
             }
         }
 
+        /// <summary>
+        /// Updates the <see cref="ProcessStartInfo" /> of the specified
+        /// <see cref="Process" />.
+        /// </summary>
+        /// <param name="process">The <see cref="Process" /> of which the <see cref="ProcessStartInfo" /> should be updated.</param>
         protected override void PrepareProcess(System.Diagnostics.Process process) {
             base.PrepareProcess(process);
 

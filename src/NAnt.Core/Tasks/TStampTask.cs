@@ -165,6 +165,12 @@ namespace NAnt.Core.Tasks {
             set { _pattern = value; }
         }
 
+        /// <summary>
+        /// Gets the formatters (configuration items which are used to set a number of additional properties with the exact same date and time).
+        /// </summary>
+        /// <value>
+        /// The formatters.
+        /// </value>
         [BuildElementArray("formatter")]
         public FormatterCollection Formatters {
             get { return _formatters; }

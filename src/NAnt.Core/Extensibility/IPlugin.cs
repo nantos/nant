@@ -18,6 +18,9 @@
 // Gert Driesen (drieseng@users.sourceforge.net.be)
 
 namespace NAnt.Core.Extensibility {
+    /// <summary>
+    /// Base interface for plugins.
+    /// </summary>
     public interface IPlugin {
     }
 }

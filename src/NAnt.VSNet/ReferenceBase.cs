@@ -30,9 +30,17 @@ using NAnt.Core.Util;
 using NAnt.VSNet.Tasks;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Base class for references.
+    /// </summary>
     public abstract class ReferenceBase {
         #region Protected Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReferenceBase"/> class.
+        /// </summary>
+        /// <param name="referencesResolver">The references resolver.</param>
+        /// <param name="parent">The parent.</param>
         protected ReferenceBase(ReferencesResolver referencesResolver, ProjectBase parent) {
             _referencesResolver = referencesResolver;
             _parent = parent;
@@ -66,6 +74,12 @@ namespace NAnt.VSNet {
             get;
         }
 
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
         public abstract string Name {
             get;
         }
@@ -81,10 +95,22 @@ namespace NAnt.VSNet {
             get { return _parent; }
         }
 
+        /// <summary>
+        /// Gets the solution task.
+        /// </summary>
+        /// <value>
+        /// The solution task.
+        /// </value>
         protected SolutionTask SolutionTask {
             get { return Parent.SolutionTask; }
         }
 
+        /// <summary>
+        /// Gets the references resolver.
+        /// </summary>
+        /// <value>
+        /// The references resolver.
+        /// </value>
         protected ReferencesResolver ReferencesResolver {
             get { return _referencesResolver; }
         }
@@ -198,6 +224,11 @@ namespace NAnt.VSNet {
 
         #region Public Static Methods
 
+        /// <summary>
+        /// Gets the related files.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="relatedFiles">The related files.</param>
         public static void GetRelatedFiles(string file, Hashtable relatedFiles) {
             // determine directory of specified file
             string directory = Path.GetDirectoryName(file);

@@ -29,9 +29,17 @@ using NAnt.Core;
 using NAnt.Core.Util;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Base class for project references.
+    /// </summary>
     public abstract class ProjectReferenceBase : ReferenceBase {
         #region Protected Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectReferenceBase"/> class.
+        /// </summary>
+        /// <param name="referencesResolver">The references resolver.</param>
+        /// <param name="parent">The parent.</param>
         protected ProjectReferenceBase(ReferencesResolver referencesResolver, ProjectBase parent) : base(referencesResolver, parent) {
         }
 
@@ -39,10 +47,22 @@ namespace NAnt.VSNet {
 
         #region Protected Instance Properties
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is private.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is private; otherwise, <c>false</c>.
+        /// </value>
         protected abstract bool IsPrivate {
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is private specified.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is private specified; otherwise, <c>false</c>.
+        /// </value>
         protected abstract bool IsPrivateSpecified {
             get;
         }
@@ -63,6 +83,12 @@ namespace NAnt.VSNet {
             get { return IsPrivateSpecified ? IsPrivate : true; }
         }
 
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
         public override string Name {
             get { return Project.Name; }
         }
@@ -192,6 +218,12 @@ namespace NAnt.VSNet {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets the project.
+        /// </summary>
+        /// <value>
+        /// The project.
+        /// </value>
         public abstract ProjectBase Project {
             get;
         }
@@ -200,6 +232,16 @@ namespace NAnt.VSNet {
 
         #region Protected Instance Methods
 
+        /// <summary>
+        /// Loads the project.
+        /// </summary>
+        /// <param name="solution">The solution.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="outputDir">The output dir.</param>
+        /// <param name="projectFile">The project file.</param>
+        /// <returns>The loaded project.</returns>
+        /// <exception cref="BuildException"></exception>
         protected ProjectBase LoadProject(SolutionBase solution, TempFileCollection tfc, GacCache gacCache, DirectoryInfo outputDir, string projectFile) {
             if (ProjectStack.Contains(projectFile)) {
                 throw new BuildException(string.Format(CultureInfo.InvariantCulture,

@@ -40,9 +40,19 @@ using NAnt.Core.Types;
 using NAnt.Win32.Tasks;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Base wrapper class for resolving references.
+    /// </summary>
     public abstract class WrapperReferenceBase : FileReferenceBase {
         #region Protected Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrapperReferenceBase"/> class.
+        /// </summary>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="referencesResolver">The references resolver.</param>
+        /// <param name="parent">The parent.</param>
+        /// <param name="gacCache">The gac cache.</param>
         protected WrapperReferenceBase(XmlElement xmlDefinition, ReferencesResolver referencesResolver, ProjectBase parent, GacCache gacCache) : base(xmlDefinition, referencesResolver, parent, gacCache) {
         }
 
@@ -243,9 +253,21 @@ namespace NAnt.VSNet {
 
         #region Protected Instance Methods
 
+        /// <summary>
+        /// Imports the type library.
+        /// </summary>
         protected abstract void ImportTypeLibrary();
+
+        /// <summary>
+        /// Imports the active x library.
+        /// </summary>
         protected abstract void ImportActiveXLibrary();
 
+        /// <summary>
+        /// Resolves the name of the wrapper assembly.
+        /// </summary>
+        /// <returns>The name of the wrapper assembly.</returns>
+        /// <exception cref="BuildException">if the primary interop assembly could not be found.</exception>
         protected string ResolveWrapperAssembly() {
             string wrapperAssembly = null;
 
@@ -273,6 +295,11 @@ namespace NAnt.VSNet {
                 wrapperAssembly);
         }
 
+        /// <summary>
+        /// Gets the primary interop assembly.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="BuildException"></exception>
         protected string GetPrimaryInteropAssembly() {
             string typeLibVersionKey = string.Format(CultureInfo.InvariantCulture, 
                 @"TYPELIB\{0}\{1}", TypeLibGuid, TypeLibVersion);
@@ -307,6 +334,10 @@ namespace NAnt.VSNet {
             return assemblyFile;
         }
 
+        /// <summary>
+        /// Gets the type library.
+        /// </summary>
+        /// <returns></returns>
         protected string GetTypeLibrary() {
             string typeLibKey = string.Format(CultureInfo.InvariantCulture, 
                 @"TYPELIB\{0}\{1}\{2}\win32", TypeLibGuid, TypeLibVersion,
@@ -338,6 +369,14 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Gets the name of the type library.
+        /// </summary>
+        /// <param name="typeLibraryPath">The type library path.</param>
+        /// <returns>The name of the type library.</returns>
+        /// <exception cref="BuildException">
+        /// If the specified library cannot be loaded.
+        /// </exception>
         protected string GetTypeLibraryName(string typeLibraryPath) {
             Object typeLib;
             try {

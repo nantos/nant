@@ -45,61 +45,170 @@ namespace NAnt.VSNet {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Adds the string.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
         public void AddString(string propName, string argName) {
             AddString(ArgGroup.Unassigned, propName, argName);
         }
+        /// <summary>
+        /// Adds the string.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="ignoreEmptyValue">if set to <c>true</c> [ignore empty value].</param>
         public void AddString(string propName, string argName, bool ignoreEmptyValue) {
             AddString(ArgGroup.Unassigned, propName, argName, ignoreEmptyValue);
         }
+        /// <summary>
+        /// Adds the string.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
         public void AddString(ArgGroup group, string propName, string argName) {
             _htArgs [propName] = new VcStringArgument(group, argName);
         }
+        /// <summary>
+        /// Adds the string.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="ignoreEmptyValue">if set to <c>true</c> [ignore empty value].</param>
         public void AddString(ArgGroup group, string propName, string argName, bool ignoreEmptyValue) {
             _htArgs [propName] = new VcStringArgument(group, argName, ignoreEmptyValue);
         }
 
+        /// <summary>
+        /// Adds the linker string.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
         public void AddLinkerString(string propName, string argName) {
             AddLinkerString(ArgGroup.Unassigned, propName, argName);
         }
+        /// <summary>
+        /// Adds the linker string.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="ignoreEmptyValue">if set to <c>true</c> [ignore empty value].</param>
         public void AddLinkerString(string propName, string argName, bool ignoreEmptyValue) {
             AddLinkerString(ArgGroup.Unassigned, propName, argName, ignoreEmptyValue);
         }
+        /// <summary>
+        /// Adds the linker string.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
         public void AddLinkerString(ArgGroup group, string propName, string argName) {
             _htArgs [propName] = new LinkerStringArgument(group, argName);
         }
+        /// <summary>
+        /// Adds the linker string.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="ignoreEmptyValue">if set to <c>true</c> [ignore empty value].</param>
         public void AddLinkerString(ArgGroup group, string propName, string argName, bool ignoreEmptyValue) {
             _htArgs [propName] = new LinkerStringArgument(group, argName, ignoreEmptyValue);
         }
 
+        /// <summary>
+        /// Adds the quoted linker string.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
         public void AddQuotedLinkerString(string propName, string argName) {
             AddQuotedLinkerString(ArgGroup.Unassigned, propName, argName);
         }
+        /// <summary>
+        /// Adds the quoted linker string.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="ignoreEmptyValue">if set to <c>true</c> [ignore empty value].</param>
         public void AddQuotedLinkerString(string propName, string argName, bool ignoreEmptyValue) {
             AddQuotedLinkerString(ArgGroup.Unassigned, propName, argName, ignoreEmptyValue);
         }
+        /// <summary>
+        /// Adds the quoted linker string.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
         public void AddQuotedLinkerString(ArgGroup group, string propName, string argName) {
             _htArgs [propName] = new QuotedLinkerStringArgument(group, argName);
         }
+        /// <summary>
+        /// Adds the quoted linker string.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="ignoreEmptyValue">if set to <c>true</c> [ignore empty value].</param>
         public void AddQuotedLinkerString(ArgGroup group, string propName, string argName, bool ignoreEmptyValue) {
             _htArgs [propName] = new QuotedLinkerStringArgument(group, argName, ignoreEmptyValue);
         }
 
+        /// <summary>
+        /// Adds the bool.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
         public void AddBool(string propName, string argName) {
             AddBool(ArgGroup.Unassigned, propName, argName);
         }
+        /// <summary>
+        /// Adds the bool.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="match">The match.</param>
         public void AddBool(string propName, string argName, string match) {
             AddBool(ArgGroup.Unassigned, propName, argName, match);
         }
+        /// <summary>
+        /// Adds the bool.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
         public void AddBool(ArgGroup group, string propName, string argName) {
             _htArgs [propName] = new VcBoolArgument(group, argName);
         }
+        /// <summary>
+        /// Adds the bool.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="match">The match.</param>
         public void AddBool(ArgGroup group, string propName, string argName, string match) {
             _htArgs [propName] = new VcBoolArgument(group, argName, match);
         }
 
+        /// <summary>
+        /// Adds the enum.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="values">The values.</param>
         public void AddEnum(string propName, string argName, params string[] values) {
             AddEnum(ArgGroup.Unassigned, propName, argName, values);
         }
+        /// <summary>
+        /// Adds the enum.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="propName">Name of the property.</param>
+        /// <param name="argName">Name of the argument.</param>
+        /// <param name="values">The values.</param>
         public void AddEnum(ArgGroup group, string propName, string argName, params string[] values) {
             _htArgs [propName] = new VcEnumArgument(group, argName, values);
         }
@@ -432,6 +541,10 @@ namespace NAnt.VSNet {
             return map;
         }
 
+        /// <summary>
+        /// Creates the midl argument map.
+        /// </summary>
+        /// <returns>The created map.</returns>
         public static VcArgumentMap CreateMidlArgumentMap() {
             VcArgumentMap map = new VcArgumentMap();
 

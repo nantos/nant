@@ -139,6 +139,14 @@ namespace NAnt.NUnit1.Tasks {
 
         #region Override implementation of Task
 
+        /// <summary>
+        /// Executes the task.
+        /// </summary>
+        /// <exception cref="BuildException">
+        /// Unit test failed, see build log.
+        /// or
+        /// Unit test had errors, see build log.
+        /// </exception>
         protected override void ExecuteTask() {
             foreach (NUnitTest test in _tests) {
                 ExecuteTest(test);

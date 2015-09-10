@@ -419,6 +419,11 @@ namespace NAnt.Core.Tasks {
 
         #region Protected Instance Methods
 
+        /// <summary>
+        /// Creates the XML reader.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <returns>The created <see cref="XmlReader"/> instance.</returns>
         protected virtual XmlReader CreateXmlReader(Uri uri) {
             Stream stream = null;
             XmlUrlResolver resolver = null;
@@ -442,6 +447,11 @@ namespace NAnt.Core.Tasks {
             return new XmlValidatingReader(xmlReader);
         }
 
+        /// <summary>
+        /// Creates the writer.
+        /// </summary>
+        /// <param name="filepath">The filepath.</param>
+        /// <returns>The created <see cref="TextWriter"/> instance.</returns>
         protected virtual TextWriter CreateWriter(string filepath) {
             string targetDir = Path.GetDirectoryName(Path.GetFullPath(filepath));
             if (!String.IsNullOrEmpty(targetDir) && !Directory.Exists(targetDir)) {

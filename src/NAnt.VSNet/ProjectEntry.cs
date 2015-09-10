@@ -25,6 +25,9 @@ using System.Runtime.CompilerServices;
 using NAnt.Core;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Class representing a project entry.
+    /// </summary>
     public class ProjectEntry {
         #region Private Instance Fields
 
@@ -36,7 +39,14 @@ namespace NAnt.VSNet {
         #endregion Private Instance Fields
 
         #region Public Instance Constructors
-            
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectEntry"/> class.
+        /// </summary>
+        /// <param name="guid">The unique identifier.</param>
+        /// <param name="path">The path.</param>
+        /// <exception cref="System.ArgumentNullException"> if <paramref name="guid"/> or <paramref name="path"/> is null.
+        /// </exception>
         public ProjectEntry(string guid, string path) {
             if (guid == null) {
                 throw new ArgumentNullException("guid");
@@ -53,10 +63,22 @@ namespace NAnt.VSNet {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets the unique identifier.
+        /// </summary>
+        /// <value>
+        /// The unique identifier.
+        /// </value>
         public string Guid {
             get { return _guid; }
         }
 
+        /// <summary>
+        /// Gets the path.
+        /// </summary>
+        /// <value>
+        /// The path.
+        /// </value>
         public string Path {
             get { return _path; }
         }

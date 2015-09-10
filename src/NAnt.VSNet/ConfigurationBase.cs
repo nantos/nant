@@ -30,6 +30,9 @@ using NAnt.Core.Util;
 using NAnt.VSNet.Tasks;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class ConfigurationBase {
         #region Protected Instance Constructors
 
@@ -149,6 +152,12 @@ namespace NAnt.VSNet {
 
         #region Protected Instance Properties
 
+        /// <summary>
+        /// Gets the solution task.
+        /// </summary>
+        /// <value>
+        /// The solution task.
+        /// </value>
         protected SolutionTask SolutionTask {
             get { return Project.SolutionTask; }
         }
@@ -157,6 +166,11 @@ namespace NAnt.VSNet {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Expands the macros.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <returns></returns>
         public string ExpandMacros(string s) {
             if (s == null) {
                 return s;

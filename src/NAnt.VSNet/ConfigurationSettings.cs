@@ -27,9 +27,18 @@ using NAnt.Core;
 using NAnt.Core.Util;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ConfigurationSettings : ConfigurationBase {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigurationSettings"/> class.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <param name="elemConfig">The elem configuration.</param>
+        /// <param name="outputDir">The output dir.</param>
         public ConfigurationSettings(ManagedProjectBase project, XmlElement elemConfig, DirectoryInfo outputDir) : base(project) {
             _settings = new ArrayList();
             if (outputDir == null) {
@@ -171,14 +180,24 @@ namespace NAnt.VSNet {
             get { return ".NET"; }
         }
 
+        /// <summary>
+        /// Get the path of the output directory relative to the project
+        /// directory.
+        /// </summary>
         public override string RelativeOutputDir {
             get { return _relativeOutputDir; }
         }
 
+        /// <summary>
+        /// Gets the output directory.
+        /// </summary>
         public override DirectoryInfo OutputDir {
             get { return _outputDir; }
         }
 
+        /// <summary>
+        /// Gets the path for the output file.
+        /// </summary>
         public override string OutputPath {
             get { 
                 return FileUtils.CombinePaths(OutputDir.FullName, 
@@ -197,10 +216,19 @@ namespace NAnt.VSNet {
             }
         }
 
+        /// <summary>
+        /// Gets the settings.
+        /// </summary>
+        /// <value>
+        /// The settings.
+        /// </value>
         public string[] Settings {
             get { return (string[]) _settings.ToArray(typeof(string)); }
         }
 
+        /// <summary>
+        /// Gets the name of the configuration.
+        /// </summary>
         public override string Name {
             get { return _name; }
         }

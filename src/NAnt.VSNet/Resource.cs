@@ -27,9 +27,21 @@ using NAnt.DotNet.Types;
 using NAnt.VSNet.Tasks;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Implementation of a Visual Studio resoruce item.
+    /// </summary>
     public class Resource {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Resource"/> class.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <param name="resourceSourceFile">The resource source file.</param>
+        /// <param name="resourceSourceFileRelativePath">The resource source file relative path.</param>
+        /// <param name="dependentFile">The dependent file.</param>
+        /// <param name="solutionTask">The solution task.</param>
+        /// <param name="gacCache">The gac cache.</param>
         public Resource(ManagedProjectBase project, FileInfo resourceSourceFile, string resourceSourceFileRelativePath, string dependentFile, SolutionTask solutionTask, GacCache gacCache) {
             _project = project;
             _resourceSourceFile = resourceSourceFile;
@@ -44,6 +56,12 @@ namespace NAnt.VSNet {
 
         #region Public Instance Properties
 
+        /// <summary>
+        /// Gets the culture.
+        /// </summary>
+        /// <value>
+        /// The culture.
+        /// </value>
         public CultureInfo Culture {
             get { return _culture; }
         }
@@ -56,6 +74,12 @@ namespace NAnt.VSNet {
             get { return _resourceSourceFile; }
         }
 
+        /// <summary>
+        /// Gets the project.
+        /// </summary>
+        /// <value>
+        /// The project.
+        /// </value>
         public ManagedProjectBase Project {
             get { return _project; }
         }
@@ -151,6 +175,12 @@ namespace NAnt.VSNet {
             return new FileInfo(compiledResourceFile);
         }
 
+        /// <summary>
+        /// Gets the name of the manifest resource.
+        /// </summary>
+        /// <param name="solutionConfiguration">The solution configuration.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException"></exception>
         public string GetManifestResourceName(Configuration solutionConfiguration) {
             // obtain project configuration (corresponding with solution configuration)
             ConfigurationSettings projectConfig = (ConfigurationSettings) Project.BuildConfigurations[solutionConfiguration];

@@ -411,6 +411,19 @@ namespace NAnt.Core {
             return task;
         }
 
+        /// <summary>
+        /// Creates the filter.
+        /// </summary>
+        /// <param name="elementNode">The element node.</param>
+        /// <param name="parent">The parent.</param>
+        /// <returns>The created filter.</returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// elementNode
+        /// or
+        /// parent
+        /// </exception>
+        /// <exception cref="BuildException">
+        /// </exception>
         public static Filter CreateFilter(XmlNode elementNode, Element parent) {
             if (elementNode == null) {
                 throw new ArgumentNullException("elementNode");

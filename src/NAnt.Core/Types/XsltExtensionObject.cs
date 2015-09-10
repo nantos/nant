@@ -23,6 +23,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using NAnt.Core.Attributes;
+using NAnt.Core.Tasks;
 using NAnt.Core.Util;
 
 namespace NAnt.Core.Types {
@@ -118,6 +119,13 @@ namespace NAnt.Core.Types {
 
         #region Public Instance Methods
 
+        /// <summary>
+        /// Creates an instance of an extension used by the <see cref="StyleTask"/>.
+        /// </summary>
+        /// <returns>The created instance.</returns>
+        /// <exception cref="BuildException">
+        /// If the creation of the instance fails.
+        /// </exception>
         public object CreateInstance() {
             // test whether extension assembly exists
             if (!AssemblyPath.Exists) {

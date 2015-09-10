@@ -29,9 +29,23 @@ using NAnt.Core.Util;
 using NAnt.VSNet.Tasks;
 
 namespace NAnt.VSNet {
+    /// <summary>
+    /// Class for handling a J# project.
+    /// </summary>
     public class JSharpProject : ManagedProjectBase {
         #region Public Instance Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JSharpProject"/> class.
+        /// </summary>
+        /// <param name="solution">The solution.</param>
+        /// <param name="projectPath">The project path.</param>
+        /// <param name="xmlDefinition">The XML definition.</param>
+        /// <param name="solutionTask">The solution task.</param>
+        /// <param name="tfc">The TFC.</param>
+        /// <param name="gacCache">The gac cache.</param>
+        /// <param name="refResolver">The reference resolver.</param>
+        /// <param name="outputDir">The output dir.</param>
         public JSharpProject(SolutionBase solution, string projectPath, XmlElement xmlDefinition, SolutionTask solutionTask, TempFileCollection tfc, GacCache gacCache, ReferencesResolver refResolver, DirectoryInfo outputDir) : base(solution, projectPath, xmlDefinition, solutionTask, tfc, gacCache, refResolver, outputDir) {
         }
 

@@ -292,6 +292,13 @@ namespace NAnt.Core.Tasks {
 
         #region Protected Instance Properties
 
+        /// <summary>
+        /// Gets a value indicating whether [conditions true].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [conditions true]; otherwise, <c>false</c>.
+        /// </value>
+        /// <exception cref="BuildException"></exception>
         protected virtual bool ConditionsTrue {
             get {
                 bool ret = true;
@@ -427,6 +434,12 @@ namespace NAnt.Core.Tasks {
     public class IfNotTask : IfTask {
         #region Override implementation of IfTask
 
+        /// <summary>
+        /// Gets a value indicating whether [conditions true].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [conditions true]; otherwise, <c>false</c>.
+        /// </value>
         protected override bool ConditionsTrue {
             get { return !base.ConditionsTrue; }
         }
