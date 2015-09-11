@@ -63,7 +63,6 @@ namespace NAnt.Core.Tasks {
         private int _exitCode = UnknownExitCode;
         private bool _spawn;
         private int _processId = 0;
-        private bool _useRuntimeEngine;
 
         #endregion Private Instance Fields
 
