@@ -954,13 +954,13 @@ namespace NAnt.Core {
                 // SSL is enabled, then send the message must be sent using the 
                 // network (instead of using the local SMTP pickup directory)
                 if (smtpUsername != null || smtpPort != null || IsSSLEnabled(properties)) {
-                    mailMessage.Headers[cdoNamespaceURI + "sendusing"] = 2; // cdoSendUsingPort
+                    mailMessage.Headers[cdoNamespaceURI + "sendusing"] = "2"; // cdoSendUsingPort
                 }
 #endif
 
                 if (smtpUsername != null) {
 #if (NET_1_1)
-                    mailMessage.Headers[cdoNamespaceURI + "smtpauthenticate"] = 1;
+                    mailMessage.Headers[cdoNamespaceURI + "smtpauthenticate"] = "1";
                     mailMessage.Headers[cdoNamespaceURI + "sendusername"] = smtpUsername;
 #else
                     Console.Error.WriteLine("[MailLogger] MailLogger.smtp.username"
