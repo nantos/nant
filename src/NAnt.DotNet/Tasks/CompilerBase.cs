@@ -52,7 +52,6 @@ namespace NAnt.DotNet.Tasks {
         private FileInfo _win32res;
         private bool _warnAsError;
         private WarningAsError _warningAsError = new WarningAsError();
-        private string _noWarn;
         private CompilerWarningCollection _suppressWarnings = new CompilerWarningCollection();
         private bool _forceRebuild;
         private string _mainType;
@@ -60,7 +59,6 @@ namespace NAnt.DotNet.Tasks {
         private FileInfo _keyFile;
         private DelaySign _delaySign = DelaySign.NotSet;
         private AssemblyFileSet _references = new AssemblyFileSet();
-        private FileSet _lib = new FileSet();
         private AssemblyFileSet _modules = new AssemblyFileSet();
         private FileSet _sources = new FileSet();
         private ResourceFileSetCollection _resourcesList = new ResourceFileSetCollection();
