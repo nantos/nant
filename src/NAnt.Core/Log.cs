@@ -954,14 +954,14 @@ namespace NAnt.Core {
                 // SSL is enabled, then send the message must be sent using the 
                 // network (instead of using the local SMTP pickup directory)
                 if (smtpUsername != null || smtpPort != null || IsSSLEnabled(properties)) {
-                    mailMessage.Fields[cdoNamespaceURI + "sendusing"] = 2; // cdoSendUsingPort
+                    mailMessage.Headers[cdoNamespaceURI + "sendusing"] = 2; // cdoSendUsingPort
                 }
 #endif
 
                 if (smtpUsername != null) {
 #if (NET_1_1)
-                    mailMessage.Fields[cdoNamespaceURI + "smtpauthenticate"] = 1;
-                    mailMessage.Fields[cdoNamespaceURI + "sendusername"] = smtpUsername;
+                    mailMessage.Headers[cdoNamespaceURI + "smtpauthenticate"] = 1;
+                    mailMessage.Headers[cdoNamespaceURI + "sendusername"] = smtpUsername;
 #else
                     Console.Error.WriteLine("[MailLogger] MailLogger.smtp.username"
                         + " is not supported if NAnt is built targeting .NET"
@@ -972,7 +972,7 @@ namespace NAnt.Core {
                 string smtpPassword = GetPropertyValue(properties, "smtp.password", null, false);
                 if (smtpPassword != null) {
 #if (NET_1_1)
-                    mailMessage.Fields[cdoNamespaceURI + "sendpassword"] = smtpPassword;
+                    mailMessage.Headers[cdoNamespaceURI + "sendpassword"] = smtpPassword;
 #else
                     Console.Error.WriteLine("[MailLogger] MailLogger.smtp.password"
                         + " is not supported if NAnt is built targeting .NET"
@@ -982,7 +982,7 @@ namespace NAnt.Core {
 
                 if (smtpPort != null) {
 #if (NET_1_1)
-                    mailMessage.Fields[cdoNamespaceURI + "smtpserverport"] = smtpPort;
+                    mailMessage.Headers[cdoNamespaceURI + "smtpserverport"] = smtpPort;
 #else
                     Console.Error.WriteLine("[MailLogger] MailLogger.smtp.port"
                         + " is not supported if NAnt is built targeting .NET"
@@ -992,7 +992,7 @@ namespace NAnt.Core {
 
                 if (smtpEnableSSL != null) {
 #if (NET_1_1)
-                    mailMessage.Fields[cdoNamespaceURI + "smtpusessl"] = smtpEnableSSL;
+                    mailMessage.Headers[cdoNamespaceURI + "smtpusessl"] = smtpEnableSSL;
 #else
                     Console.Error.WriteLine("[MailLogger] MailLogger.smtp.enablessl"
                         + " is not supported if NAnt is built targeting .NET"
