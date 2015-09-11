@@ -112,7 +112,7 @@
     <Compile Include="NAnt.Core\Tasks\ExecTaskTest.cs" />
     <Compile Include="NAnt.Core\Tasks\ExternalProgramBaseTest.cs" />
     <Compile Include="NAnt.Core\Tasks\FailTest.cs" />
-    <None Include="NAnt.Core\Tasks\GetTaskTest.cs" />
+    <Compile Include="NAnt.Core\Tasks\GetTaskTest.cs" />
     <Compile Include="NAnt.Core\Tasks\IfTest.cs" />
     <Compile Include="NAnt.Core\Tasks\IncludeTaskTest.cs" />
     <Compile Include="NAnt.Core\Tasks\LoadTasksTest.cs" />

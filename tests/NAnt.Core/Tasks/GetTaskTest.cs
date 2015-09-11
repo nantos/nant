@@ -23,13 +23,12 @@ using System.IO;
 using NUnit.Framework;
 
 using NAnt.Core.Tasks;
+using NAnt.Core.Types;
 
 namespace Tests.NAnt.Core.Tasks {
     [TestFixture]
     [Category("InetAccess")]
     public class GetTaskTest : BuildTestBase {
-        string _proxy = null;
-
         /// <summary>
         /// Fetch a page from a FTP site.
         /// </summary>
@@ -46,7 +45,6 @@ namespace Tests.NAnt.Core.Tasks {
         public void Test_GetFtpFile() {
             GetTask getTask = new GetTask();
             getTask.Project = CreateEmptyProject();
-            getTask.HttpProxy = _proxy;
 
             string source = "ftp://ftp.info-zip.org/pub/infozip/zlib/zlib.html";
             string destination = Path.GetTempFileName() + ".html";
@@ -59,7 +57,7 @@ namespace Tests.NAnt.Core.Tasks {
             getTask.Source = source;
             getTask.DestinationFile = new FileInfo(destination);
             getTask.UseTimeStamp = false;
-            getTask.IgnoreErrors = true;
+            getTask.FailOnError = true;
             getTask.Verbose = true;;
             try {
                 getTask.Execute();
@@ -92,7 +90,6 @@ namespace Tests.NAnt.Core.Tasks {
             {
                 GetTask getTask = new GetTask();
                 getTask.Project = CreateEmptyProject();
-                getTask.HttpProxy = _proxy;
 
                 if (File.Exists(destination)) {
                     File.Delete(destination);
@@ -102,7 +99,7 @@ namespace Tests.NAnt.Core.Tasks {
                 getTask.Source = source;
                 getTask.DestinationFile = new FileInfo(destination);
                 getTask.UseTimeStamp = true;
-                getTask.IgnoreErrors = true;
+                getTask.FailOnError = true;
                 getTask.Verbose = true;;
                 getTask.Execute();
 
@@ -113,7 +110,6 @@ namespace Tests.NAnt.Core.Tasks {
             {
                 GetTask getTask = new GetTask();
                 getTask.Project = CreateEmptyProject();
-                getTask.HttpProxy = _proxy;
 
                 Assert.IsTrue(File.Exists(destination), destination + " does not exist, but should");
 
@@ -122,7 +118,7 @@ namespace Tests.NAnt.Core.Tasks {
                 getTask.Source = source;
                 getTask.DestinationFile = new FileInfo(destination);
                 getTask.UseTimeStamp = true;
-                getTask.IgnoreErrors = true;
+                getTask.FailOnError = true;
                 getTask.Verbose = true;;
                 getTask.Execute();
 
@@ -134,7 +130,6 @@ namespace Tests.NAnt.Core.Tasks {
             {
                 GetTask getTask = new GetTask();
                 getTask.Project = CreateEmptyProject();
-                getTask.HttpProxy = _proxy;
 
                 Assert.IsTrue(File.Exists(destination), destination + " doesn't exist");
                 File.SetLastWriteTime(destination, DateTime.Parse("01/01/2000 00:00"));
@@ -143,7 +138,7 @@ namespace Tests.NAnt.Core.Tasks {
                 getTask.Source = source;
                 getTask.DestinationFile = new FileInfo(destination);
                 getTask.UseTimeStamp = true;
-                getTask.IgnoreErrors = true;
+                getTask.FailOnError = true;
                 getTask.Verbose = true;;
                 getTask.Execute();
 
@@ -215,7 +210,6 @@ namespace Tests.NAnt.Core.Tasks {
         public void Test_GetHtmlFile() {
             GetTask getTask = new GetTask();
             getTask.Project = CreateEmptyProject();
-            getTask.HttpProxy = _proxy;
 
             string source = "http://nant.sourceforge.net/index.html";
             string destination = Path.GetTempFileName() + ".gif";
@@ -229,7 +223,7 @@ namespace Tests.NAnt.Core.Tasks {
             getTask.Source = source;
             getTask.DestinationFile = new FileInfo(destination);
             getTask.UseTimeStamp = false;
-            getTask.IgnoreErrors = true;
+            getTask.FailOnError = true;
             getTask.Verbose = true;;
             getTask.Execute();
 
@@ -251,9 +245,9 @@ namespace Tests.NAnt.Core.Tasks {
             GetTask getTask = new GetTask();
             getTask.Project = CreateEmptyProject();
 
-            string proxy = _proxy;
-            getTask.HttpProxy = proxy;
-            Assert.IsTrue(getTask.HttpProxy == proxy, "Proxy accessor bug");
+            Proxy proxy = new Proxy();
+            getTask.Proxy = proxy;
+            Assert.IsTrue(getTask.Proxy == proxy, "Proxy accessor bug");
 
             string source = "http://nant.sourceforge.net/arrow.gif";
             getTask.Source = source;
@@ -263,12 +257,12 @@ namespace Tests.NAnt.Core.Tasks {
             getTask.DestinationFile = new FileInfo(destination);
 
             bool ignoreErrors = true;
-            getTask.IgnoreErrors = ignoreErrors;
-            Assert.IsTrue(getTask.IgnoreErrors == ignoreErrors, "ignoreErrors=true accessor bug");
+            getTask.FailOnError = ignoreErrors;
+            Assert.IsTrue(getTask.FailOnError == ignoreErrors, "ignoreErrors=true accessor bug");
 
             ignoreErrors = false;
-            getTask.IgnoreErrors = ignoreErrors;
-            Assert.IsTrue(getTask.IgnoreErrors == ignoreErrors, "ignoreErrors=false accessor bug");
+            getTask.FailOnError = ignoreErrors;
+            Assert.IsTrue(getTask.FailOnError == ignoreErrors, "ignoreErrors=false accessor bug");
 
             bool useTimeStamp = true;
             getTask.UseTimeStamp = useTimeStamp;

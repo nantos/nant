@@ -134,17 +134,6 @@ namespace NAnt.Core.Tasks {
         }
 
         /// <summary>
-        /// Log errors but don't treat as fatal. The default is <see langword="false" />.
-        /// </summary>
-        [TaskAttribute("ignoreerrors")]
-        [Obsolete("Use the 'failonerror' attribute instead.")]
-        [BooleanValidator()]
-        public bool IgnoreErrors {
-            get { return FailOnError; }
-            set { FailOnError = value; }
-        }
-
-        /// <summary>
         /// Conditionally download a file based on the timestamp of the local 
         /// copy. HTTP only. The default is <see langword="false" />.
         /// </summary>
