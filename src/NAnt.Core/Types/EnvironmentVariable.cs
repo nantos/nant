@@ -196,16 +196,6 @@ namespace NAnt.Core.Types {
         /// <summary>
         /// Environment variable to pass to a program.
         /// </summary>
-        [BuildElementArray("option")]
-        [Obsolete("Use <variable> element instead.")]
-        public OptionCollection Options {
-            get { return _options; }
-            set { _options = value; }
-        }
-
-        /// <summary>
-        /// Environment variable to pass to a program.
-        /// </summary>
         [BuildElementArray("variable")]
         public EnvironmentVariableCollection EnvironmentVariables {
             get { return _environmentVariables; }

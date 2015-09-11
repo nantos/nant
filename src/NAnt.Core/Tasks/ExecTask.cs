@@ -181,21 +181,6 @@ namespace NAnt.Core.Tasks {
         #region Override implementation of ExternalProgramBase
 
         /// <summary>
-        /// Specifies whether the external program should be executed using a 
-        /// runtime engine, if configured. The default is <see langword="false" />.
-        /// </summary>
-        /// <value>
-        /// <see langword="true" /> if the external program should be executed 
-        /// using a runtime engine; otherwise, <see langword="false" />.
-        /// </value>
-        [TaskAttribute("useruntimeengine")]
-        [Obsolete("Use the managed attribute and Managed property instead.", false)]
-        public override bool UseRuntimeEngine {
-            get { return base.UseRuntimeEngine ; }
-            set { base.UseRuntimeEngine = value; }
-        }
-
-        /// <summary>
         /// Specifies whether the external program is a managed application
         /// which should be executed using a runtime engine, if configured. 
         /// The default is <see langword="false" />.
@@ -364,15 +349,6 @@ namespace NAnt.Core.Tasks {
             process.StartInfo.WorkingDirectory = WorkingDirectory.FullName;
 
             // set environment variables
-            foreach (Option option in EnvironmentSet.Options) {
-                if (option.IfDefined && !option.UnlessDefined) {
-                    if (option.Value == null) {
-                        process.StartInfo.EnvironmentVariables[option.OptionName] = "";
-                    } else {
-                        process.StartInfo.EnvironmentVariables[option.OptionName] = option.Value;
-                    }
-                }
-            }
             foreach (EnvironmentVariable variable in EnvironmentSet.EnvironmentVariables) {
                 if (variable.IfDefined && !variable.UnlessDefined) {
                     if (variable.Value == null) {

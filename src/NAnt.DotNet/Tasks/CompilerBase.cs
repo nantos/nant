@@ -225,26 +225,6 @@ namespace NAnt.DotNet.Tasks {
         }
 
         /// <summary>
-        /// Specifies a comma-separated list of warnings that should be suppressed
-        /// by the compiler.
-        /// </summary>
-        /// <value>
-        /// Comma-separated list of warnings that should be suppressed by the 
-        /// compiler.
-        /// </value>
-        /// <remarks>
-        /// <para>
-        /// Corresponds with the <c>/nowarn</c> flag.
-        /// </para>
-        /// </remarks>
-        [TaskAttribute("nowarn")]
-        [Obsolete("Use the <nowarn> element instead.", false)]
-        public virtual string NoWarn {
-            get { return _noWarn; }
-            set { _noWarn = StringUtils.ConvertEmptyToNull(value); }
-        }
-
-        /// <summary>
         /// Specifies a list of warnings that you want the compiler to suppress.
         /// </summary>
         [BuildElementCollection("nowarn", "warning")]
@@ -313,21 +293,6 @@ namespace NAnt.DotNet.Tasks {
         public virtual DelaySign DelaySign {
             get { return _delaySign; }
             set { _delaySign = value; }
-        }
-
-        /// <summary>
-        /// Additional directories to search in for assembly references.
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Corresponds with the <c>/lib[path]:</c> flag.
-        /// </para>
-        /// </remarks>
-        [BuildElement("lib")]
-        [Obsolete("Use the <lib> element in <references> and <modules> instead.", false)]
-        public FileSet Lib {
-            get { return _lib; }
-            set {_lib = value; }
         }
 
         /// <summary>
@@ -519,9 +484,7 @@ namespace NAnt.DotNet.Tasks {
                     if (References.BaseDirectory == null) {
                         References.BaseDirectory = new DirectoryInfo(Project.BaseDirectory);
                     }
-                    if (Lib.BaseDirectory == null) {
-                        Lib.BaseDirectory = new DirectoryInfo(Project.BaseDirectory);
-                    }
+
                     if (Modules.BaseDirectory == null) {
                         Modules.BaseDirectory = new DirectoryInfo(Project.BaseDirectory);
                     }   
@@ -529,12 +492,6 @@ namespace NAnt.DotNet.Tasks {
                         Sources.BaseDirectory = new DirectoryInfo(Project.BaseDirectory);
                     }
                     
-                    // copy lib path details across to the children Assembly filesets
-                    foreach(string directoryName in Lib.DirectoryNames){
-                        References.Lib.DirectoryNames.Add(directoryName);
-                        Modules.Lib.DirectoryNames.Add(directoryName);
-                    }
-
                     // rescan to ensure correct assembly resolution
                     References.Scan();
                     Modules.Scan();
@@ -1088,10 +1045,6 @@ namespace NAnt.DotNet.Tasks {
                 if (warning.IfDefined && !warning.UnlessDefined) {
                     warnings.AddRange(warning.Number.Split(','));
                 }
-            }
-
-            if (NoWarn != null) {
-                warnings.AddRange(NoWarn.Split(','));
             }
 
             if (warnings.Count > 0) {

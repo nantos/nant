@@ -33,12 +33,15 @@ using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Web.Mail;
-
 using NAnt.Core.Types;
 using NAnt.Core.Util;
+using MailMessage = System.Net.Mail.MailMessage;
+
 
 namespace NAnt.Core {
     /// <summary>
@@ -936,8 +939,8 @@ namespace NAnt.Core {
 
                 // create message to send
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = GetPropertyValue(properties, "from", null, true);
-                mailMessage.To = GetPropertyValue(properties, prefix + ".to", null, true);
+                mailMessage.From = new MailAddress(GetPropertyValue(properties, "from", null, true));
+                mailMessage.To.Add(new MailAddress(GetPropertyValue(properties, prefix + ".to", null, true)));
                 mailMessage.Subject = GetPropertyValue(properties, prefix + ".subject",
                     (success) ? "Build Success" : "Build Failure", false);
                 mailMessage.Body = _buffer.ToString();
@@ -1007,8 +1010,9 @@ namespace NAnt.Core {
                 }
 
                 // send the message
-                SmtpMail.SmtpServer = GetPropertyValue(properties, "mailhost", "localhost", false);
-                SmtpMail.Send(mailMessage);
+                SmtpClient smtpClient = new SmtpClient();
+                smtpClient.Host = GetPropertyValue(properties, "mailhost", "localhost", false);
+                smtpClient.Send(mailMessage);
             } catch (Exception ex) {
                 Console.Error.WriteLine("[MailLogger] E-mail could not be sent!");
                 Console.Error.WriteLine(ex.ToString());
@@ -1089,8 +1093,7 @@ namespace NAnt.Core {
                 }
 
                 // create attachment
-                MailAttachment attachment = new MailAttachment(fileName, 
-                    MailEncoding.UUEncode);
+                Attachment attachment = new Attachment(fileName);
                 // add attachment to mail
                 mail.Attachments.Add(attachment);
             }

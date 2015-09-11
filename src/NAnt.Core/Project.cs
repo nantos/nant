@@ -590,7 +590,7 @@ namespace NAnt.Core {
         /// <exception cref="BuildException">NAnt does not support the current platform.</exception>
         public string PlatformName {
             get { 
-                if (PlatformHelper.IsWin32) {
+                if (PlatformHelper.IsWindows) {
                     return "win32";
                 } else if (PlatformHelper.IsUnix) {
                     return "unix";
@@ -1663,7 +1663,7 @@ namespace NAnt.Core {
         }
 
         private XmlNode GetConfigurationNode() {
-            XmlNode configurationNode = ConfigurationSettings.GetConfig("nant") as XmlNode;
+            XmlNode configurationNode = ConfigurationManager.GetSection("nant") as XmlNode;
             if (configurationNode == null) { 
                 throw new BuildException(string.Format(CultureInfo.InvariantCulture, 
                     "The NAnt configuration settings in file '{0}' could" 

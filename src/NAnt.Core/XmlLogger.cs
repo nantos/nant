@@ -459,12 +459,11 @@ namespace NAnt.Core {
 
         private bool IsValidXml(string message) {
             if (Regex.Match(message, @"^<.*>").Success) {
-                XmlValidatingReader reader = null;
+                XmlReader reader = null;
 
                 try {
                     // validate xml
-                    reader = new XmlValidatingReader(message, 
-                        XmlNodeType.Document, null);
+                    reader = XmlReader.Create(new StringReader(message));
 
                     while (reader.Read()) {
                     }

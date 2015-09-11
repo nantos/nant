@@ -20,7 +20,6 @@
 // Gert Driesen (drieseng@users.sourceforge.net)
 
 using System.Reflection;
-using System.Security.Permissions;
 
 // This will not compile with Visual Studio.  If you want to build a signed
 // executable use the NAnt build file.  To build under Visual Studio just
@@ -28,7 +27,3 @@ using System.Security.Permissions;
 [assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile(@"..\NAnt.key")]
 [assembly: AssemblyKeyName("")]
-
-#if (!NET_4_0)
-[assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum , Unrestricted=true)]
-#endif

@@ -239,35 +239,6 @@ namespace NAnt.Core.Tasks {
         }
 
         /// <summary>
-        /// Specifies whether the external program is a managed application
-        /// which should be executed using a runtime engine, if configured. 
-        /// The default is <see langword="false" />.
-        /// </summary>
-        /// <value>
-        /// <see langword="true" /> if the external program should be executed 
-        /// using a runtime engine; otherwise, <see langword="false" />.
-        /// </value>
-        /// <remarks>
-        ///   <para>
-        ///   The value of <see cref="UseRuntimeEngine" /> is only used from
-        ///   <see cref="Managed" />, and then only if its value is set to
-        ///   <see cref="ManagedExecution.Default" />. In which case
-        ///   <see cref="Managed" /> returns <see cref="ManagedExecution.Auto" />
-        ///   if <see cref="UseRuntimeEngine" /> is <see langword="true" />.
-        ///   </para>
-        ///   <para>
-        ///   In all other cases, the value of <see cref="UseRuntimeEngine" />
-        ///   is ignored.
-        ///   </para>
-        /// </remarks>
-        [FrameworkConfigurable("useruntimeengine")]
-        [Obsolete("Use the managed attribute and Managed property instead.", false)]
-        public virtual bool UseRuntimeEngine {
-            get { return _useRuntimeEngine; }
-            set { _useRuntimeEngine = value; }
-        }
-
-        /// <summary>
         /// Specifies whether the external program should be treated as a managed
         /// application, possibly forcing it to be executed under the currently
         /// targeted version of the CLR.
@@ -279,14 +250,8 @@ namespace NAnt.Core.Tasks {
         /// <remarks>
         ///   <para>
         ///   If <see cref="Managed" /> is set to <see cref="ManagedExecution.Default" />,
-        ///   which is the default value, and <see cref="UseRuntimeEngine" /> is
-        ///   <see langword="true" /> then <see cref="ManagedExecution.Auto" />
+        ///   which is the default value then <see cref="ManagedExecution.Auto" />
         ///   is returned.
-        ///   </para>
-        ///   <para>
-        ///   When the changing <see cref="Managed" /> to <see cref="ManagedExecution.Default" />,
-        ///   then <see cref="UseRuntimeEngine" /> is set to <see langword="false" />;
-        ///   otherwise, it is changed to <see langword="true" />.
         ///   </para>
         /// </remarks>
         [FrameworkConfigurable("managed")]
@@ -294,7 +259,7 @@ namespace NAnt.Core.Tasks {
             get {
                 // deal with cases where UseRuntimeEngine is overridden to
                 // return true by default
-                if (UseRuntimeEngine && _managed == ManagedExecution.Default) {
+                if (_managed == ManagedExecution.Default) {
                     return ManagedExecution.Auto;
                 }
 
@@ -302,7 +267,6 @@ namespace NAnt.Core.Tasks {
             }
             set {
                 _managed = value;
-                UseRuntimeEngine = (value != ManagedExecution.Default);
             }
         }
 

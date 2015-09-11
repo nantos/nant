@@ -376,7 +376,7 @@ namespace NAnt.Core.Tasks {
                     }
                 }
 #else
-                mailMessage.ReplyTo = ConvertStringToMailAddress(ReplyTo);
+                mailMessage.ReplyToList.Add(ConvertStringToMailAddress(ReplyTo));
 #endif
             }
 

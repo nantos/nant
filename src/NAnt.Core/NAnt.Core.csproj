@@ -177,7 +177,6 @@
     <EmbeddedResource Include="Resources\ProjectHelp.xslt" />
     <EmbeddedResource Include="Resources\Strings.resx" />
     <Compile Include="Tasks\AttribTask.cs" />
-    <Compile Include="Tasks\AvailableTask.cs" />
     <Compile Include="Tasks\CallTask.cs" />
     <Compile Include="Tasks\CopyTask.cs" />
     <Compile Include="Tasks\DeleteTask.cs" />

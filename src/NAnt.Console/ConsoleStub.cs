@@ -399,7 +399,7 @@ namespace NAnt.Console {
                 // its added to privatebinpath in the config file, as entries 
                 // in the config file are not reflected in SetupInformation
                 if (Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib"))) {
-                    AppDomain.CurrentDomain.AppendPrivatePath("lib");
+                    AppDomain.CurrentDomain.SetupInformation.PrivateBinPath += ";lib";
                 }
 
                 // add framework specific entries to privatebinpath
@@ -408,7 +408,7 @@ namespace NAnt.Console {
                         logger.DebugFormat(CultureInfo.InvariantCulture,
                             "Adding '{0}' to private bin path.", 
                             probePath);
-                        AppDomain.CurrentDomain.AppendPrivatePath(probePath);
+                        AppDomain.CurrentDomain.SetupInformation.PrivateBinPath += ";"  +probePath;
                     }
                 }
 

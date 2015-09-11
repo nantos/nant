@@ -102,8 +102,7 @@ namespace NAnt.NUnit2.Tasks {
                     null,
                     new object[] {probePaths, references},
                     CultureInfo.InvariantCulture,
-                    null,
-                    AppDomain.CurrentDomain.Evidence);
+                    null);
 #endif
             // create testrunner
             return CreateTestRunner(_domain);
@@ -168,8 +167,7 @@ namespace NAnt.NUnit2.Tasks {
                 null,
                 null,
                 CultureInfo.InvariantCulture,
-                null,
-                AppDomain.CurrentDomain.Evidence);
+                null);
 #endif
             return (RemoteTestRunner) oh.Unwrap();
         }

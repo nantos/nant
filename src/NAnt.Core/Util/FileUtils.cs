@@ -368,7 +368,7 @@ namespace NAnt.Core.Util
                 return Path.GetFullPath(path);
             }
 
-            if (path.Length == 0 || path.Trim().Length == 0 || path.IndexOfAny(Path.InvalidPathChars) != -1) {
+            if (path.Length == 0 || path.Trim().Length == 0 || path.IndexOfAny(Path.GetInvalidPathChars()) != -1) {
                 throw new ArgumentException("The path is not of a legal form.");
             }
 

@@ -432,8 +432,7 @@ namespace NAnt.DotNet.Tasks {
                 LicenseGatherer licenseGatherer = (LicenseGatherer)
                     newDomain.CreateInstanceAndUnwrap(typeof(LicenseGatherer).Assembly.FullName,
                     typeof(LicenseGatherer).FullName, false, BindingFlags.Public | BindingFlags.Instance,
-                    null, new object[0], CultureInfo.InvariantCulture, new object[0],
-                    AppDomain.CurrentDomain.Evidence);
+                    null, new object[0], CultureInfo.InvariantCulture, new object[0]);
 #endif
                 licenseGatherer.CreateLicenseFile(this, licensesFile.FullName);
 

@@ -262,15 +262,6 @@ namespace NAnt.Core {
         /// Derived classes should override to this method to provide extra 
         /// initialization and validation not covered by the base class.
         /// </summary>
-        /// <param name="elementNode">The XML node of the element to use for initialization.</param>
-        [Obsolete("Deprecated. Use Initialize() instead")]
-        protected virtual void InitializeElement(XmlNode elementNode) {
-        }
-
-        /// <summary>
-        /// Derived classes should override to this method to provide extra 
-        /// initialization and validation not covered by the base class.
-        /// </summary>
         /// <remarks>
         /// Access to the <see cref="XmlNode" /> that was used to initialize
         /// this <see cref="Element" /> is available through <see cref="XmlNode" />.
@@ -323,7 +314,6 @@ namespace NAnt.Core {
             }
             
             // allow inherited classes a chance to do some custom initialization
-            InitializeElement(elementNode);
             Initialize();
         }
 

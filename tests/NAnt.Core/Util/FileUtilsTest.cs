@@ -49,7 +49,7 @@ namespace Tests.NAnt.Core.Util {
 
         [Test]
         public void Test_GetFullPath() {
-            if (!PlatformHelper.IsWin32) {
+            if (!PlatformHelper.IsWindows) {
                 return;
             }
 
@@ -107,7 +107,7 @@ namespace Tests.NAnt.Core.Util {
 
         [Test]
         public void Test_CombinePaths() {
-            if (!PlatformHelper.IsWin32) {
+            if (!PlatformHelper.IsWindows) {
                 return;
             }
 

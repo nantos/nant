@@ -32,20 +32,12 @@ namespace Tests.NAnt.Core.Tasks {
             ExternalProgramBase prog;
             
             prog = new MockExternalProgram ();
-            Assert.IsFalse (prog.UseRuntimeEngine, "#A1");
             Assert.AreEqual (ManagedExecution.Default, prog.Managed, "#A2");
-            prog.UseRuntimeEngine = true;
-            Assert.IsTrue (prog.UseRuntimeEngine, "#A3");
             Assert.AreEqual (ManagedExecution.Auto, prog.Managed, "#A4");
-            prog.UseRuntimeEngine = false;
-            Assert.IsFalse (prog.UseRuntimeEngine, "#A5");
             Assert.AreEqual (ManagedExecution.Default, prog.Managed, "#A6");
 
             prog = new ManagedExternalProgram ();
-            Assert.IsTrue (prog.UseRuntimeEngine, "#B1");
             Assert.AreEqual (ManagedExecution.Auto, prog.Managed, "#B2");
-            prog.UseRuntimeEngine = false;
-            Assert.IsFalse (prog.UseRuntimeEngine, "#B3");
             Assert.AreEqual (ManagedExecution.Default, prog.Managed, "#B4");
         }
 
@@ -57,28 +49,19 @@ namespace Tests.NAnt.Core.Tasks {
             Assert.AreEqual (ManagedExecution.Default, prog.Managed, "#A1");
             prog.Managed = ManagedExecution.Auto;
             Assert.AreEqual (ManagedExecution.Auto, prog.Managed, "#A2");
-            Assert.IsTrue (prog.UseRuntimeEngine, "#A3");
             prog.Managed = ManagedExecution.Default;
             Assert.AreEqual (ManagedExecution.Default, prog.Managed, "#A4");
-            Assert.IsFalse (prog.UseRuntimeEngine, "#A5");
             prog.Managed = ManagedExecution.Strict;
             Assert.AreEqual (ManagedExecution.Strict, prog.Managed, "#A6");
-            Assert.IsTrue (prog.UseRuntimeEngine, "#A7");
-            prog.UseRuntimeEngine = true;
             Assert.AreEqual (ManagedExecution.Strict, prog.Managed, "#A8");
-            Assert.IsTrue (prog.UseRuntimeEngine, "#A9");
 
             prog = new ManagedExternalProgram ();
             Assert.AreEqual (ManagedExecution.Auto, prog.Managed, "#B1");
             prog.Managed = ManagedExecution.Strict;
             Assert.AreEqual (ManagedExecution.Strict, prog.Managed, "#B2");
-            Assert.IsTrue (prog.UseRuntimeEngine, "#B3");
             prog.Managed = ManagedExecution.Default;
             Assert.AreEqual (ManagedExecution.Default, prog.Managed, "#B4");
-            Assert.IsFalse (prog.UseRuntimeEngine, "#B5");
-            prog.UseRuntimeEngine = true;
             Assert.AreEqual (ManagedExecution.Auto, prog.Managed, "#B6");
-            Assert.IsTrue (prog.UseRuntimeEngine, "#B7");
         }
     }
 
@@ -89,15 +72,6 @@ namespace Tests.NAnt.Core.Tasks {
     }
 
     class ManagedExternalProgram : ExternalProgramBase {
-        private bool _useRuntimeEngine = true;
-
-        [Obsolete]
-        public override bool UseRuntimeEngine {
-            get { return _useRuntimeEngine; }
-            set { _useRuntimeEngine = value; }
-        }
-
-
         public override string ProgramArguments {
             get { return "boo.exe"; }
         }

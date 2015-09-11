@@ -442,9 +442,9 @@ namespace NAnt.Core.Tasks {
                 stream = request.GetResponse().GetResponseStream();
             }
 
-            XmlTextReader xmlReader = new XmlTextReader(uri.ToString(), stream);
-            xmlReader.XmlResolver = resolver;
-            return new XmlValidatingReader(xmlReader);
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings();
+            xmlReaderSettings.XmlResolver = resolver;
+            return XmlReader.Create(stream, xmlReaderSettings, uri.ToString());
         }
 
         /// <summary>

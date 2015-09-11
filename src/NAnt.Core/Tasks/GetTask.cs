@@ -85,7 +85,6 @@ namespace NAnt.Core.Tasks {
 
         private string _src;
         private FileInfo _destFile;
-        private string _httpProxy;
         private Proxy _proxy;
         private int _timeout = 100000;
         private bool _useTimeStamp;
@@ -113,18 +112,6 @@ namespace NAnt.Core.Tasks {
         public FileInfo DestinationFile {
             get { return _destFile; }
             set { _destFile = value; }
-        }
-
-        /// <summary>
-        /// If inside a firewall, proxy server/port information
-        /// Format: {proxy server name}:{port number}
-        /// Example: proxy.mycompany.com:8080 
-        /// </summary>
-        [TaskAttribute("httpproxy")]
-        [Obsolete("Use the <proxy> child element instead.", false)]
-        public string HttpProxy {
-            get { return _httpProxy; }
-            set { _httpProxy = value; }
         }
 
         /// <summary>
@@ -199,10 +186,6 @@ namespace NAnt.Core.Tasks {
             if (DestinationFile.Exists && (FileAttributes.ReadOnly == (File.GetAttributes(DestinationFile.FullName) & FileAttributes.ReadOnly))) {
                 throw new BuildException(string.Format("Destination file '{0}' is read-only.", 
                     DestinationFile.FullName), Location);
-            }
-
-            if (Proxy != null && HttpProxy != null) {
-                throw new BuildException("The <proxy> child element and the 'httpproxy' attribute are mutually exclusive.", Location);
             }
         }
 
@@ -430,8 +413,6 @@ namespace NAnt.Core.Tasks {
             // configure proxy settings
             if (Proxy != null) {
                 webRequest.Proxy = Proxy.GetWebProxy();
-            } else if (HttpProxy != null) {
-                webRequest.Proxy = new WebProxy(HttpProxy);
             }
 
             // set authentication information

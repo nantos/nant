@@ -343,7 +343,7 @@ namespace NAnt.DotNet.Tasks {
                 References.BaseDirectory = new DirectoryInfo(Project.BaseDirectory);
             }
 
-            ICodeCompiler compiler = compilerInfo.Compiler;
+            CodeDomProvider compiler = compilerInfo.Provider;
             CompilerParameters options = new CompilerParameters();
             options.GenerateExecutable = false;
             options.GenerateInMemory = true;
@@ -389,7 +389,7 @@ namespace NAnt.DotNet.Tasks {
             
             StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);
             
-            compilerInfo.CodeGen.GenerateCodeFromCompileUnit(compileUnit, sw, null);
+            compiler.GenerateCodeFromCompileUnit(compileUnit, sw, null);
             string code = sw.ToString();
             
             Log(Level.Debug, ResourceUtils.GetString("String_GeneratedCodeLooksLike") + "\n{0}", code);
@@ -517,7 +517,7 @@ namespace NAnt.DotNet.Tasks {
         #region Private Static Methods
 
         private static CodeDomProvider CreateCodeDomProvider(string typeName, string assemblyName) {
-            Assembly providerAssembly = Assembly.LoadWithPartialName(assemblyName);
+            Assembly providerAssembly = Assembly.Load(assemblyName);
             if (providerAssembly == null) {
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture,
                     ResourceUtils.GetString("NA2037"), assemblyName));
@@ -544,12 +544,14 @@ namespace NAnt.DotNet.Tasks {
         #endregion Private Static Methods
 
         internal class CompilerInfo {
-            public readonly ICodeCompiler Compiler;
-            public readonly ICodeGenerator CodeGen;
+            //public readonly ICodeCompiler Compiler;
+            //public readonly ICodeGenerator CodeGen;
+            public readonly CodeDomProvider Provider;
 
             public CompilerInfo(CodeDomProvider provider) {
-                Compiler = provider.CreateCompiler();
-                CodeGen = provider.CreateGenerator();
+                //Compiler = provider.CreateCompiler();
+                //CodeGen = provider.CreateGenerator();
+                this.Provider = provider;
             }
 
             public CodeCompileUnit GenerateCode(string typeName, string codeBody,

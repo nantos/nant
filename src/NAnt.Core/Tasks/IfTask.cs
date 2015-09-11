@@ -40,11 +40,6 @@ namespace NAnt.Core.Tasks {
     ///   If more than one attribute is used, they are &amp;&amp;'d. The first 
     ///   to fail stops the check.
     ///   </para>
-    ///   <para>
-    ///   The order of condition evaluation is, <see cref="TargetNameExists" />, 
-    ///   <see cref="PropertyNameExists" />, <see cref="PropertyNameTrue" />, 
-    ///   <see cref="UpToDateFile" />.
-    ///   </para>
     ///   <note>
     ///   instead of using the deprecated attributes, we advise you to use the
     ///   following functions in combination with the <see cref="Test" />
@@ -181,9 +176,6 @@ namespace NAnt.Core.Tasks {
     public class IfTask : TaskContainer {
         #region Private Instance Fields
 
-        private string _propNameTrue;
-        private string _propNameExists;
-        private string _targetName;
         private string _test;
         private FileSet _compareFiles;
         private FileSet _uptodateFiles;
@@ -227,58 +219,6 @@ namespace NAnt.Core.Tasks {
         }
 
         /// <summary>
-        /// The <see cref="FileSet" /> that contains the comparison files for 
-        /// the <see cref="UpToDateFile" />(s) check.
-        /// </summary>
-        [BuildElement("comparefiles")]
-        [System.Obsolete("Use <uptodate /> task instead.", false)]
-        public FileSet CompareFiles {
-            get { return _compareFiles; }
-            set { _compareFiles = value; }
-        } 
-
-        /// <summary>
-        /// The <see cref="FileSet" /> that contains the uptodate files for 
-        /// the <see cref="CompareFile" />(s) check.
-        /// </summary>
-        [BuildElement("uptodatefiles")]
-        [System.Obsolete("Use <uptodate /> task instead.", false)]
-        public FileSet UpToDateFiles {
-            get { return _uptodateFiles; }
-            set { _uptodateFiles = value; }
-        }
-
-        /// <summary>
-        /// Used to test whether a property is true.
-        /// </summary>
-        [TaskAttribute("propertytrue")]
-        [System.Obsolete("Use <if test=\"${propertyname}\"> instead.", false)]
-        public string PropertyNameTrue {
-            get { return _propNameTrue; }
-            set { _propNameTrue = StringUtils.ConvertEmptyToNull(value); }
-        }
-
-        /// <summary>
-        /// Used to test whether a property exists.
-        /// </summary>
-        [TaskAttribute("propertyexists")]
-        [System.Obsolete("Use <if test=\"${property::exists('propertyname')}\"> instead.", false)]
-        public string PropertyNameExists {
-            get { return _propNameExists;}
-            set { _propNameExists = StringUtils.ConvertEmptyToNull(value); }
-        }
-
-        /// <summary>
-        /// Used to test whether a target exists.
-        /// </summary>
-        [TaskAttribute("targetexists")]
-        [System.Obsolete("Use <if test=\"${target::exists('targetname')}\"> instead.", false)]
-        public string TargetNameExists {
-            get { return _targetName; }
-            set { _targetName = StringUtils.ConvertEmptyToNull(value); }
-        }
-
-        /// <summary>
         /// Used to test arbitrary boolean expression.
         /// </summary>
         [TaskAttribute("test")]
@@ -305,54 +245,6 @@ namespace NAnt.Core.Tasks {
 
                 if (Test != null) {
                     if (!Convert.ToBoolean(Test, CultureInfo.InvariantCulture)) {
-                        return false;
-                    }
-                }
-
-                // check if target exists
-                if (TargetNameExists != null) {
-                    ret = ret && (Project.Targets.Find(TargetNameExists) != null);
-                    if (!ret) {
-                        return false;
-                    }
-                }
-
-                // check if property exists
-                if (PropertyNameExists != null) {
-                    ret = ret && Properties.Contains(PropertyNameExists);
-                    if (!ret) {
-                        return false;
-                    }
-                }
-
-                // check if value of property is boolean true
-                if (PropertyNameTrue != null) {
-                    try {
-                        ret = ret && bool.Parse(Properties[PropertyNameTrue]);
-                        if (!ret) {
-                            return false;
-                        }
-                    } catch (Exception ex) {
-                        throw new BuildException(string.Format(CultureInfo.InvariantCulture, 
-                            ResourceUtils.GetString("NA1126"), PropertyNameTrue), Location, ex);
-                    }
-                }
-
-                // check if file is up-to-date
-                if (UpToDateFiles != null) {
-                    FileInfo primaryFile = UpToDateFiles.MostRecentLastWriteTimeFile;
-                    if (primaryFile == null || !primaryFile.Exists) {
-                        ret = false;
-                        Log(Level.Verbose, "Uptodatefile(s) do(es) not exist.");
-                    } else {
-                        string newerFile = FileSet.FindMoreRecentLastWriteTime(_compareFiles.FileNames, primaryFile.LastWriteTime);
-                        bool needsAnUpdate = (newerFile != null);
-                        if (needsAnUpdate) {
-                            Log(Level.Verbose, "{0} is newer than {1}.", newerFile, primaryFile.Name);
-                        }
-                        ret = ret && !needsAnUpdate;
-                    }
-                    if (!ret) {
                         return false;
                     }
                 }
@@ -389,9 +281,8 @@ namespace NAnt.Core.Tasks {
             base.Initialize();
 
             //check that we have something to do.
-            if ((UpToDateFiles == null || CompareFiles == null) && Test == null && PropertyNameExists == null && PropertyNameTrue == null && TargetNameExists == null) {
-                throw new BuildException("At least one if condition" +
-                        " must be set (test, propertytrue, targetexists, etc...):", Location);
+            if (Test == null) {
+                throw new BuildException("At least one test condition must be set:", Location);
             }
         }
 

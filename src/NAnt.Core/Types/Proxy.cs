@@ -142,7 +142,7 @@ namespace NAnt.Core.Types {
                 return proxy;
             } else {
                 // the global HTTP proxy
-                return GlobalProxySelection.Select;
+                return WebRequest.DefaultWebProxy;
             }
         }
 

@@ -172,20 +172,6 @@ namespace NAnt.DotNet.Tasks {
         }
 
         /// <summary>
-        /// Specifies a comma-separated list of warnings that should be suppressed
-        /// by the compiler.
-        /// </summary>
-        /// <remarks>
-        /// Override to avoid exposing this to build authors, as the JScript.NET
-        /// compiler does not support package references.
-        /// </remarks>
-        [Obsolete("Use the <nowarn> element instead.", false)]
-        public override string NoWarn {
-            get { return base.NoWarn; }
-            set { base.NoWarn = value; }
-        }
-
-        /// <summary>
         /// Specifies a list of warnings that you want the compiler to suppress.
         /// </summary>
         /// <remarks>

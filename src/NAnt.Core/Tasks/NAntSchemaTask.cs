@@ -141,7 +141,9 @@ namespace NAnt.Core.Tasks {
             // let's validate whether we emitted a valid XML Schema
             try {
                 XmlSchema schema = XmlSchema.Read(ms, null);
-                schema.Compile(null);
+                XmlSchemaSet xmlSchemaSet = new XmlSchemaSet();
+                xmlSchemaSet.Add(schema);
+                xmlSchemaSet.Compile();
             } catch (XmlSchemaException ex) {
                 throw new BuildException ("The generated XML schema is not valid.", 
                     Location, ex);
@@ -408,7 +410,10 @@ namespace NAnt.Core.Tasks {
             #region Public Instance Methods
 
             public void Compile() {
-                _nantSchema.Compile(new ValidationEventHandler(ValidationEH));
+                XmlSchemaSet xmlSchemaSet =new XmlSchemaSet();
+                xmlSchemaSet.Add(_nantSchema);
+                xmlSchemaSet.Compile();
+                xmlSchemaSet.ValidationEventHandler += ValidationEH;
             }
 
             #endregion Public Instance Methods

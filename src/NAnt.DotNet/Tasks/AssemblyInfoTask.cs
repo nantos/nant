@@ -323,8 +323,7 @@ namespace NAnt.DotNet.Tasks {
             #region Private Instance Fields
 
             private readonly CodeLanguage _language;
-            private readonly ICodeGenerator _generator;
-
+            private readonly CodeDomProvider provider = null;
             #endregion Private Instance Fields
 
             #region Public Instance Constructors
@@ -336,8 +335,6 @@ namespace NAnt.DotNet.Tasks {
             /// <param name="assemblyInfoTask">The <see cref="AssemblyInfoTask" /> for which an instance of the <see cref="CodeProvider" /> class should be initialized.</param>
             /// <param name="codeLanguage">The <see cref="CodeLanguage" /> for which an instance of the <see cref="CodeProvider" /> class should be initialized.</param>
             public CodeProvider(AssemblyInfoTask assemblyInfoTask, CodeLanguage codeLanguage) {
-                CodeDomProvider provider = null;
-
                 switch (codeLanguage) {
                     case CodeLanguage.CSharp:
                         provider = new Microsoft.CSharp.CSharpCodeProvider();
@@ -351,7 +348,6 @@ namespace NAnt.DotNet.Tasks {
                         throw new NotSupportedException(ResourceUtils.GetString("NA2007"));
                 }
 
-                _generator = provider.CreateGenerator();
                 _language = codeLanguage;
             }
 
@@ -365,14 +361,6 @@ namespace NAnt.DotNet.Tasks {
             /// </summary>
             private CodeLanguage Language {
                 get { return _language; }
-            }
-
-            /// <summary>
-            /// Gets the <see cref="ICodeGenerator" /> that will be used to 
-            /// generate the AssemblyInfo code.
-            /// </summary>
-            private ICodeGenerator Generator {
-                get { return _generator; }
             }
 
             #endregion Private Instance Properties
@@ -391,7 +379,7 @@ namespace NAnt.DotNet.Tasks {
                     codeNamespace.Imports.Add(new CodeNamespaceImport(import));
                 }
 
-                Generator.GenerateCodeFromNamespace(codeNamespace, writer, new CodeGeneratorOptions());
+                this.provider.GenerateCodeFromNamespace(codeNamespace, writer, new CodeGeneratorOptions());
             }
 
             /// <summary>
@@ -437,7 +425,7 @@ namespace NAnt.DotNet.Tasks {
                     }
                 }
 
-                Generator.GenerateCodeFromCompileUnit(codeCompileUnit, writer, new CodeGeneratorOptions());
+                this.provider.GenerateCodeFromCompileUnit(codeCompileUnit, writer, new CodeGeneratorOptions());
             }
 
             #endregion Public Instance Methods
@@ -459,8 +447,7 @@ namespace NAnt.DotNet.Tasks {
                 TypedValueGatherer typedValueGatherer = (TypedValueGatherer) 
                     newDomain.CreateInstanceAndUnwrap(typeof(TypedValueGatherer).Assembly.FullName, 
                     typeof(TypedValueGatherer).FullName, false, BindingFlags.Public | BindingFlags.Instance, 
-                    null, new object[0], CultureInfo.InvariantCulture, new object[0], 
-                    AppDomain.CurrentDomain.Evidence);
+                    null, new object[0], CultureInfo.InvariantCulture, new object[0]);
 #endif
 
                 object typedValue = typedValueGatherer.GetTypedValue(

@@ -105,7 +105,6 @@
     <Compile Include="NAnt.Core\Functions\FileFunctionsTest.cs" />
     <Compile Include="NAnt.Core\Functions\TargetFunctionsTest.cs" />
     <Compile Include="NAnt.Core\Tasks\AttribTaskTest.cs" />
-    <Compile Include="NAnt.Core\Tasks\AvailableTest.cs" />
     <Compile Include="NAnt.Core\Tasks\CallTest.cs" />
     <Compile Include="NAnt.Core\Tasks\CopyTest.cs" />
     <Compile Include="NAnt.Core\Tasks\DeleteTest.cs" />
